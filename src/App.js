@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import ResponsiveDrawer from "./components/home";
+import ResponsiveDrawer from "./components/home/home";
 
 function App() {
   return (
