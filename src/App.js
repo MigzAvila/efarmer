@@ -2,10 +2,13 @@ import logo from "./logo.svg";
 import "./App.css";
 import ResponsiveDrawer from "./components/home/home";
 
+import Weather from "./components/pages/Weather";
+
 function App() {
   return (
     <div>
       <ResponsiveDrawer />
+      {/* <Weather /> */}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
