@@ -8,23 +8,6 @@ import NavBar from "./navbar";
 
 const drawerWidth = 240;
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
@@ -43,6 +26,23 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
     }),
   })
 );
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(["margin", "width"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -66,12 +66,11 @@ export default function PersistentDrawerLeft(props) {
   };
 
   return (
-    <div>
-      mira aki wei
+    <>
       <Weather />
-      <Box sx={{ display: "flex" }}>
-        <NavBar />
-        <Main open={(props.open, console.log(props))}>
+      <Box  sx={{ display: "flex" }}>
+        <NavBar open={open} handleDrawerOpen={handleDrawerOpen} handleDrawerClose= {handleDrawerClose} />
+        <Main open={open}>
           <DrawerHeader />
           <Weather />
           <Typography paragraph>
@@ -107,6 +106,6 @@ export default function PersistentDrawerLeft(props) {
           </Typography>
         </Main>
       </Box>
-    </div>
+    </>
   );
 }
