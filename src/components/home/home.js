@@ -82,7 +82,6 @@ export default function PersistentDrawerLeft(props) {
 
         <Main open={open}>
           <DrawerHeader />
-          Het
           <Routes />
         </Main>
       </Box>
