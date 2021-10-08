@@ -14,9 +14,18 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import HomeIcon from '@mui/icons-material/Home';
+import CloudIcon from '@mui/icons-material/Cloud';
+import SettingsIcon from '@mui/icons-material/Settings';
+import StorageOutlinedIcon from '@mui/icons-material/StorageOutlined';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
+const LinkStyle = {
+  textDecoration: 'none', 
+  color: 'black',
+  cursor: 'pointer'
+
+};
 
 const tabItems = ["Weather", "Settings"];
 // "Home","DataCenter",
@@ -114,49 +123,44 @@ export default function Navbar(props) {
 
         <Divider />
         <List>
-          {/* {tabItems.map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <Link to="/{text}">
-                <ListItemText primary={text} />
-              </Link>
-              <Link to="/{text}">{text}</Link>
-            </ListItem>
-          ))} */}
-
           <ListItem button>
             <ListItemIcon>
-              <InboxIcon />
+              <HomeIcon />
             </ListItemIcon>
-            <Link to="/">
+            <Link style={LinkStyle} to="/">
               <ListItemText primary="Home" />
             </Link>
           </ListItem>
 
           <ListItem button>
             <ListItemIcon>
-              <InboxIcon />
+              <CloudIcon />
             </ListItemIcon>
-            <Link to="/Weather">
+            <Link style={LinkStyle} to="/Weather">
               <ListItemText primary="Weather" />
             </Link>
           </ListItem>
         </List>
 
-        <Divider />
+        <ListItem button>
+            <ListItemIcon>
+              <StorageOutlinedIcon />
+            </ListItemIcon>
+            <Link style={LinkStyle} to="/DataCenter">
+              <ListItemText primary="Data Center" />
+            </Link>
+          </ListItem>
 
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+          <ListItem button>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <Link style={LinkStyle} to="/Settings">
+              <ListItemText primary="Settings" />
+            </Link>
+          </ListItem>
+
+        <Divider />
       </Drawer>
       {/* </Box> */}
     </>

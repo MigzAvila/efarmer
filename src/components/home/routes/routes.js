@@ -1,6 +1,8 @@
 import React from "react";
 import Weather from "../../pages/Weather";
 import Example from "../../pages/Example";
+import DataCenter from "../../pages/DataCenter";
+import Settings from "../../pages/Settings";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -15,10 +17,10 @@ const routes = () => {
           <Weather />
         </Route>
         <Route path="/DataCenter">
-          <Example />
+          <DataCenter />
         </Route>
         <Route path="/Settings">
-          <Example />
+          <Settings />
         </Route>
       </Switch>
     </>
