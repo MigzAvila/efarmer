@@ -83,23 +83,7 @@ export default function PersistentDrawerLeft(props) {
         <Main open={open}>
           <DrawerHeader />
           Het
-          <Switch>
-            {/* <Route path="/Tert">
-              <Example />
-            </Route> */}
-            <Route exact path="/">
-              <Example />
-            </Route>
-            <Route path="/Weather">
-              <Weather />
-            </Route>
-            {/* <Route path="/DataCenter">
-              <Example />
-            </Route> */}
-            {/* <Route path="/Settings">
-              <Example />
-            </Route> */}
-          </Switch>
+          <Routes />
         </Main>
       </Box>
     </Router>

@@ -8,7 +8,7 @@ const routes = () => {
   return (
     <>
       <Switch>
-        <Route path="/Home">
+        <Route exact path="/">
           <Example />
         </Route>
         <Route path="/Weather">
@@ -19,9 +19,6 @@ const routes = () => {
         </Route>
         <Route path="/Settings">
           <Example />
-        </Route>
-        <Route exact path="/">
-          <Weather />
         </Route>
       </Switch>
     </>
