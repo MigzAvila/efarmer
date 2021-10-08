@@ -18,7 +18,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CloudIcon from "@mui/icons-material/Cloud";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LinkStyle = {
   textDecoration: "none",
@@ -161,7 +161,6 @@ export default function Navbar(props) {
 
         <Divider />
       </Drawer>
-      {/* </Box> */}
     </>
   );
 }

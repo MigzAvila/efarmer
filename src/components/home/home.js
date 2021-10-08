@@ -1,8 +1,6 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Weather from "../pages/Weather";
 import MuiAppBar from "@mui/material/AppBar";
 import NavBar from "./navbar";
 
