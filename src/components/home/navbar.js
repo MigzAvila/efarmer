@@ -18,8 +18,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-const tabItems = ["Home", "Weather", "DataCenter", "Settings"];
-
+const tabItems = ["Weather", "Settings"];
+// "Home","DataCenter",
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -114,7 +114,7 @@ export default function Navbar(props) {
 
         <Divider />
         <List>
-          {tabItems.map((text, index) => (
+          {/* {tabItems.map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -124,7 +124,25 @@ export default function Navbar(props) {
               </Link>
               <Link to="/{text}">{text}</Link>
             </ListItem>
-          ))}
+          ))} */}
+
+          <ListItem button>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <Link to="/">
+              <ListItemText primary="Home" />
+            </Link>
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <Link to="/Weather">
+              <ListItemText primary="Weather" />
+            </Link>
+          </ListItem>
         </List>
 
         <Divider />

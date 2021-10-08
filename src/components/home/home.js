@@ -7,7 +7,10 @@ import MuiAppBar from "@mui/material/AppBar";
 import NavBar from "./navbar";
 
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Routes from "./routes/routes";
+import Routes from "./routes/Routes";
+
+// import Weather from "../pages/Weather";
+import Example from "../pages/Example";
 
 const drawerWidth = 240;
 
@@ -79,7 +82,24 @@ export default function PersistentDrawerLeft(props) {
 
         <Main open={open}>
           <DrawerHeader />
-          <Routes />
+          Het
+          <Switch>
+            {/* <Route path="/Tert">
+              <Example />
+            </Route> */}
+            <Route exact path="/">
+              <Example />
+            </Route>
+            <Route path="/Weather">
+              <Weather />
+            </Route>
+            {/* <Route path="/DataCenter">
+              <Example />
+            </Route> */}
+            {/* <Route path="/Settings">
+              <Example />
+            </Route> */}
+          </Switch>
         </Main>
       </Box>
     </Router>
