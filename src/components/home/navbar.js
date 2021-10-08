@@ -14,17 +14,16 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from '@mui/icons-material/Home';
-import CloudIcon from '@mui/icons-material/Cloud';
-import SettingsIcon from '@mui/icons-material/Settings';
-import StorageOutlinedIcon from '@mui/icons-material/StorageOutlined';
+import HomeIcon from "@mui/icons-material/Home";
+import CloudIcon from "@mui/icons-material/Cloud";
+import SettingsIcon from "@mui/icons-material/Settings";
+import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 const LinkStyle = {
-  textDecoration: 'none', 
-  color: 'black',
-  cursor: 'pointer'
-
+  textDecoration: "none",
+  color: "black",
+  cursor: "pointer",
 };
 
 const tabItems = ["Weather", "Settings"];
@@ -143,22 +142,22 @@ export default function Navbar(props) {
         </List>
 
         <ListItem button>
-            <ListItemIcon>
-              <StorageOutlinedIcon />
-            </ListItemIcon>
-            <Link style={LinkStyle} to="/DataCenter">
-              <ListItemText primary="Data Center" />
-            </Link>
-          </ListItem>
+          <ListItemIcon>
+            <StorageOutlinedIcon />
+          </ListItemIcon>
+          <Link style={LinkStyle} to="/DataCenter">
+            <ListItemText primary="Data Center" />
+          </Link>
+        </ListItem>
 
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <Link style={LinkStyle} to="/Settings">
-              <ListItemText primary="Settings" />
-            </Link>
-          </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <Link style={LinkStyle} to="/Settings">
+            <ListItemText primary="Settings" />
+          </Link>
+        </ListItem>
 
         <Divider />
       </Drawer>
