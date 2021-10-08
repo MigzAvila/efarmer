@@ -16,6 +16,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
+const tabItems = ["Home", "Weather", "DataCenter", "Settings"];
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -66,15 +69,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function Navbar(props) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleDrawerClose = () => {
-  //   setOpen(false);
-  // };
 
   return (
     <>
@@ -117,18 +111,24 @@ export default function Navbar(props) {
             )}
           </IconButton>
         </DrawerHeader>
+
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {tabItems.map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <Link to="/{text}">
+                <ListItemText primary={text} />
+              </Link>
+              <Link to="/{text}">{text}</Link>
             </ListItem>
           ))}
         </List>
+
         <Divider />
+
         <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem button key={text}>
