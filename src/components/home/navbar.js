@@ -75,7 +75,7 @@ export default function Navbar(props) {
             edge="start"
             sx={{ mr: 2, ...(props.open && { display: "none" }) }}
           >
-            <MenuIcon />
+           {!props.open ?  <MenuIcon  />: null}
           </IconButton>
           {!props.open ? (
             <Typography variant="h6" noWrap component="div">

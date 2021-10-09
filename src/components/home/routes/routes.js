@@ -1,9 +1,11 @@
 import React from "react";
 import Weather from "../../pages/Weather";
 import Home from "../../pages/Home";
+// import DataCenter from "../../pages/DataCenter";
 import DataCenter from "../../pages/DataCenter";
 import Settings from "../../pages/Settings";
 import Forum from "../../pages/Forum"
+
 import { Route, Switch } from "react-router-dom";
 
 const routes = () => {
