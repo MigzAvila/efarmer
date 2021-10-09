@@ -1,6 +1,9 @@
 import * as React from "react";
 import Paper from "@material-ui/core/Paper";
 import List from "@mui/material/List";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
 import {
   BarSeries,
   Chart,
@@ -10,6 +13,13 @@ import {
   ValueAxis,
 } from "@devexpress/dx-react-chart-material-ui";
 import { Animation } from "@devexpress/dx-react-chart";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 const chartData = [
   { region: "Asia", val: 4119626293 },
@@ -34,8 +44,8 @@ export default class Demo extends React.PureComponent {
     super(props);
 
     this.state = {
-        chartData,
-        barGraphData
+      chartData,
+      barGraphData,
     };
   }
 
@@ -43,26 +53,35 @@ export default class Demo extends React.PureComponent {
     const { chartData: chartData } = this.state;
     const { barGraphData: barGraphData } = this.state;
     return (
-      <Paper>
-        <Chart data={chartData}>
-          <PieSeries
-            valueField="val"
-            argumentField="region"
-            innerRadius={0.6}
-          />
-          <Title text="The Population of Continents and Regions" />
-          <Animation />
-        </Chart>
+      <Box sx={{ width: "100%" }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={6}>
+            <Item>
+              <Chart data={chartData}>
+                <PieSeries
+                  valueField="val"
+                  argumentField="region"
+                  innerRadius={0.6}
+                />
+                <Title text="The Population of Continents and Regions" />
+                <Animation />
+              </Chart>
+            </Item>
+          </Grid>
+          <Grid item xs={6}>
+            <Item>
+                <Chart data={barGraphData}>
+                  <ArgumentAxis />
+                  <ValueAxis max={7} />
 
-        <Chart data={barGraphData}>
-          <ArgumentAxis />
-          <ValueAxis max={7} />
-
-          <BarSeries valueField="population" argumentField="year" />
-          <Title text="World population" />
-          <Animation />
-        </Chart>
-      </Paper>
+                  <BarSeries valueField="population" argumentField="year" />
+                  <Title text="World population" />
+                  <Animation />
+                </Chart>
+            </Item>
+          </Grid>
+        </Grid>
+      </Box>
     );
   }
 }
