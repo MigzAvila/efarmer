@@ -6,7 +6,7 @@ const containerstyle = {
 };
 const iframeStyle = {
   width: "80%",
-  height: "500px",
+  height: "650px",
   border: "none",
 };
 
