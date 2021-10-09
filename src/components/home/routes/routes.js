@@ -1,6 +1,6 @@
 import React from "react";
 import Weather from "../../pages/Weather";
-import Example from "../../pages/Example";
+import Home from "../../pages/Home";
 import DataCenter from "../../pages/DataCenter";
 import Settings from "../../pages/Settings";
 
@@ -11,7 +11,7 @@ const routes = () => {
     <>
       <Switch>
         <Route exact path="/">
-          <Example />
+          <Home />
         </Route>
         <Route path="/Weather">
           <Weather />

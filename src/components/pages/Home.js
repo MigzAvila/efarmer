@@ -1,4 +1,5 @@
 import React from "react";
+import DoughnutChart from "../charts/doughnutChart"
 
 const Example = () => {
   return (
@@ -12,7 +13,9 @@ const Example = () => {
       Sample page Sample page Sample page Sample page Sample page Sample page{" "}
       Sample page Sample page Sample page Sample page Sample page Sample page{" "}
       Sample page Sample page Sample page Sample page Sample page Sample page{" "}
-      Sample page{" "}
+      Sample page
+
+      <DoughnutChart/>
     </div>
   );
 };

@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Routes from "./routes/routes";
 
 // import Weather from "../pages/Weather";
-import Example from "../pages/Example";
 
 const drawerWidth = 240;
 
