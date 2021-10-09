@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import {
+  Legend,
   BarSeries,
   Chart,
   PieSeries,
@@ -30,7 +31,7 @@ const chartData = [
   { region: "Oceania", val: 35104756 },
 ];
 const barGraphData = [
-  { year: "1950", population: 2.525 },
+  { year: "1950", population: 2.525},
   { year: "1960", population: 3.018 },
   { year: "1970", population: 3.682 },
   { year: "1980", population: 4.44 },
@@ -65,23 +66,28 @@ export default class Demo extends React.PureComponent {
                 />
                 <Title text="The Population of Continents and Regions" />
                 <Animation />
+                <Legend />
               </Chart>
             </Item>
           </Grid>
           <Grid item xs={6}>
             <Item>
-                <Chart data={barGraphData}>
-                  <ArgumentAxis />
-                  <ValueAxis max={7} />
+              <Chart data={barGraphData}>
+                <ArgumentAxis />
+                <ValueAxis max={7} />
 
-                  <BarSeries valueField="population" argumentField="year" />
-                  <Title text="World population" />
-                  <Animation />
-                </Chart>
+                <BarSeries valueField="population" argumentField="year" />
+                <Title text="World population" />
+                <Animation />
+              </Chart>
             </Item>
           </Grid>
         </Grid>
       </Box>
     );
   }
+}
+
+const style ={
+    
 }
