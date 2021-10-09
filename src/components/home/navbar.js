@@ -18,6 +18,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CloudIcon from "@mui/icons-material/Cloud";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
+import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
 
 const LinkStyle = {
@@ -152,7 +153,7 @@ export default function Navbar(props) {
 
         <ListItem button>
           <ListItemIcon>
-            <SettingsIcon />
+            <ForumIcon />
           </ListItemIcon>
           <Link style={LinkStyle} to="/Forum">
             <ListItemText primary="Forum" />
