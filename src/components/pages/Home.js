@@ -1,23 +1,13 @@
 import React from "react";
-import DoughnutChart from "../charts/doughnutChart"
+import DoughnutChart from "../charts/doughnutChart";
 
-const Example = () => {
+const Home = () => {
   return (
     <div>
-      Sample pageSample pageSample pageSample page Sample pageSample page Sample
-      page Sample page Sample page Sample page Sample page Sample page Sample
-      page Sample page Sample page Sample page Sample page Sample page Sample
-      pageSample pageSample page Sample page Sample page Sample page Sample page{" "}
-      Sample page Sample page Sample page Sample page Sample page Sample page{" "}
-      Sample page Sample page Sample page Sample page Sample page Sample page{" "}
-      Sample page Sample page Sample page Sample page Sample page Sample page{" "}
-      Sample page Sample page Sample page Sample page Sample page Sample page{" "}
-      Sample page Sample page Sample page Sample page Sample page Sample page{" "}
-      Sample page
-
-      <DoughnutChart/>
+      <h1 style={{ textAlign: "center" }}>Reports</h1>
+      <DoughnutChart />
     </div>
   );
 };
 
-export default Example;
+export default Home;

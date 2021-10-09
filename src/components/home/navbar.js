@@ -93,7 +93,7 @@ export default function Navbar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            Menu
           </Typography>
         </Toolbar>
       </AppBar>
