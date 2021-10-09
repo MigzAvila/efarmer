@@ -23,11 +23,10 @@ import { Link } from "react-router-dom";
 
 const LinkStyle = {
   textDecoration: "none",
-  color: "black",
+  color: "white",
   cursor: "pointer",
 };
 
-const tabItems = ["Weather", "Settings"];
 // "Home","DataCenter",
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -48,25 +47,6 @@ const AppBar = styled(MuiAppBar, {
 
 const drawerWidth = 240;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-);
-
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -82,7 +62,11 @@ export default function Navbar(props) {
   return (
     <>
       <CssBaseline />
-      <AppBar position="fixed" open={props.open}>
+      <AppBar
+        position="fixed"
+        open={props.open}
+        style={{ backgroundColor: "#009688", color: "white" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -93,9 +77,11 @@ export default function Navbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Menu
-          </Typography>
+          {!props.open ? (
+            <Typography variant="h6" noWrap component="div">
+              Menu
+            </Typography>
+          ) : null}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -105,6 +91,8 @@ export default function Navbar(props) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            backgroundColor: "#009688",
+            color: "white",
           },
         }}
         variant="persistent"
@@ -114,18 +102,21 @@ export default function Navbar(props) {
         <DrawerHeader>
           <IconButton onClick={props.handleDrawerClose}>
             {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon style={{ color: "white" }} />
             ) : (
-              <ChevronRightIcon />
+              <ChevronRightIcon style={{ color: "white" }} />
             )}
           </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Back
+          </Typography>
         </DrawerHeader>
 
         <Divider />
         <List>
           <ListItem button>
             <ListItemIcon>
-              <HomeIcon />
+              <HomeIcon style={{ color: "white" }} />
             </ListItemIcon>
             <Link style={LinkStyle} to="/">
               <ListItemText primary="Home" />
@@ -134,7 +125,7 @@ export default function Navbar(props) {
 
           <ListItem button>
             <ListItemIcon>
-              <CloudIcon />
+              <CloudIcon style={{ color: "white" }} />
             </ListItemIcon>
             <Link style={LinkStyle} to="/Weather">
               <ListItemText primary="Weather" />
@@ -144,7 +135,7 @@ export default function Navbar(props) {
 
         <ListItem button>
           <ListItemIcon>
-            <StorageOutlinedIcon />
+            <StorageOutlinedIcon style={{ color: "white" }} />
           </ListItemIcon>
           <Link style={LinkStyle} to="/DataCenter">
             <ListItemText primary="Data Center" />
@@ -153,7 +144,7 @@ export default function Navbar(props) {
 
         <ListItem button>
           <ListItemIcon>
-            <ForumIcon />
+            <ForumIcon style={{ color: "white" }} />
           </ListItemIcon>
           <Link style={LinkStyle} to="/Forum">
             <ListItemText primary="Forum" />
@@ -162,7 +153,7 @@ export default function Navbar(props) {
 
         <ListItem button>
           <ListItemIcon>
-            <SettingsIcon />
+            <SettingsIcon style={{ color: "white" }} />
           </ListItemIcon>
           <Link style={LinkStyle} to="/Settings">
             <ListItemText primary="Settings" />
