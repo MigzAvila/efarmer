@@ -19,6 +19,9 @@ const routes = () => {
         <Route path="/DataCenter">
           <DataCenter />
         </Route>
+        <Route path="/Forum">
+          <Settings />
+        </Route>
         <Route path="/Settings">
           <Settings />
         </Route>

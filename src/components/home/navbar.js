@@ -154,6 +154,15 @@ export default function Navbar(props) {
           <ListItemIcon>
             <SettingsIcon />
           </ListItemIcon>
+          <Link style={LinkStyle} to="/Forum">
+            <ListItemText primary="Forum" />
+          </Link>
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
           <Link style={LinkStyle} to="/Settings">
             <ListItemText primary="Settings" />
           </Link>
