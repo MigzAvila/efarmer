@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import MuiAppBar from "@mui/material/AppBar";
@@ -21,11 +21,31 @@ import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
 
+const drawerWidth = 240;
+
+const tabArrays = [
+  { Link: "/", Name: "Home", Icon: <HomeIcon style={{ color: "white" }} /> },
+  { Link: "/Weather", Name: "Weather", Icon: <CloudIcon style={{ color: "white" }} />},
+  { Link: "/DataCenter", Name: "Data Center", Icon: <StorageOutlinedIcon style={{ color: "white" }} />},
+  { Link: "/Forum", Name: "Forum", Icon: <ForumIcon style={{ color: "white" }} />},
+  { Link: "/Settings", Name: "Settings", Icon: <SettingsIcon style={{ color: "white" }} />},
+  // { Link: "/LoginForm", Name: "Login Form", Icon: <SettingsIcon style={{ color: "white" }} />},
+];
+
 const LinkStyle = {
   textDecoration: "none",
   color: "white",
   cursor: "pointer",
 };
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-end",
+}));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -44,21 +64,18 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
- const drawerWidth = 240;
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
-
-export default function Navbar(props) {
-  // const [drawerWidth, setDrawerWidth] = useState(()=>{return 240});
+const Navbar = (props) => {
+  const [tab, setTabs] = useState([]);
   const theme = useTheme();
 
+  useEffect(() => {
+
+    setTabs(() => {
+      return tabArrays;
+    });
+
+  }, []);
+  
   return (
     <>
       <CssBaseline />
@@ -75,7 +92,7 @@ export default function Navbar(props) {
             edge="start"
             sx={{ mr: 2, ...(props.open && { display: "none" }) }}
           >
-           {!props.open ?  <MenuIcon  />: null}
+            {!props.open ? <MenuIcon /> : null}
           </IconButton>
           {!props.open ? (
             <Typography variant="h6" noWrap component="div">
@@ -111,57 +128,20 @@ export default function Navbar(props) {
             Back
           </Typography>
         </DrawerHeader>
-
         <Divider />
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon style={{ color: "white" }} />
-            </ListItemIcon>
-            <Link style={LinkStyle} to="/">
-              <ListItemText primary="Home" />
-            </Link>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemIcon>
-              <CloudIcon style={{ color: "white" }} />
-            </ListItemIcon>
-            <Link style={LinkStyle} to="/Weather">
-              <ListItemText primary="Weather" />
-            </Link>
-          </ListItem>
+          {tab.map((text, index) => (
+            <ListItem button key={index}>
+              <ListItemIcon>{text.Icon}</ListItemIcon>
+              <Link style={LinkStyle} to={text.Link} key={index}>
+                <ListItemText primary={text.Name} key={index} />
+              </Link>
+            </ListItem>
+          ))}
         </List>
-
-        <ListItem button>
-          <ListItemIcon>
-            <StorageOutlinedIcon style={{ color: "white" }} />
-          </ListItemIcon>
-          <Link style={LinkStyle} to="/DataCenter">
-            <ListItemText primary="Data Center" />
-          </Link>
-        </ListItem>
-
-        <ListItem button>
-          <ListItemIcon>
-            <ForumIcon style={{ color: "white" }} />
-          </ListItemIcon>
-          <Link style={LinkStyle} to="/Forum">
-            <ListItemText primary="Forum" />
-          </Link>
-        </ListItem>
-
-        <ListItem button>
-          <ListItemIcon>
-            <SettingsIcon style={{ color: "white" }} />
-          </ListItemIcon>
-          <Link style={LinkStyle} to="/Settings">
-            <ListItemText primary="Settings" />
-          </Link>
-        </ListItem>
-
         <Divider />
       </Drawer>
     </>
   );
-}
+};
+export default Navbar;

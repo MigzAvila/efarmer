@@ -5,7 +5,6 @@ import NavBar from "./navbar";
 import { BrowserRouter as Router} from "react-router-dom";
 import Routes from "./routes/routes";
 
-
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
