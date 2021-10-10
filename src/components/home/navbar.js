@@ -29,7 +29,7 @@ const tabArrays = [
   { Link: "/DataCenter", Name: "Data Center", Icon: <StorageOutlinedIcon style={{ color: "white" }} />},
   { Link: "/Forum", Name: "Forum", Icon: <ForumIcon style={{ color: "white" }} />},
   { Link: "/Settings", Name: "Settings", Icon: <SettingsIcon style={{ color: "white" }} />},
-  // { Link: "/LoginForm", Name: "Login Form", Icon: <SettingsIcon style={{ color: "white" }} />},
+  { Link: "/LoginForm", Name: "Login Form", Icon: <SettingsIcon style={{ color: "white" }} />},
 ];
 
 const LinkStyle = {
