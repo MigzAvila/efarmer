@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import MuiAppBar from "@mui/material/AppBar";
@@ -27,7 +27,6 @@ const LinkStyle = {
   cursor: "pointer",
 };
 
-// "Home","DataCenter",
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -45,7 +44,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const drawerWidth = 240;
+ const drawerWidth = 240;
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -57,6 +56,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function Navbar(props) {
+  // const [drawerWidth, setDrawerWidth] = useState(()=>{return 240});
   const theme = useTheme();
 
   return (
