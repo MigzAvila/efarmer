@@ -138,6 +138,12 @@ const Navbar = (props) => {
               </Link>
             </ListItem>
           ))}
+          {/* <ListItem button>
+              <ListItemIcon><SettingsIcon style={{ color: "white" }} /></ListItemIcon>
+              <Link style={LinkStyle} to="/LoginForm" >
+                <ListItemText primary="Login Form" />
+              </Link>
+            </ListItem> */}
         </List>
         <Divider />
       </Drawer>

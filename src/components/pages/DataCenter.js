@@ -1,6 +1,5 @@
 import * as React from "react";
 import Paper from "@material-ui/core/Paper";
-import List from "@mui/material/List";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";

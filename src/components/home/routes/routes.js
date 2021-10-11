@@ -8,7 +8,6 @@ import LoginForm from "../../pages/LoginForm";
 import { Route, Switch } from "react-router-dom";
 
 const Switches = [
-  // { paths: "/", page: <Home /> },
   { paths: "/Weather", page: <Weather /> },
   { paths: "/DataCenter", page: <DataCenter /> },
   { paths: "/Forum", page: <Forum /> },
@@ -16,11 +15,8 @@ const Switches = [
   { paths: "/LoginForm", page: <LoginForm /> },
 ];
 const Routes = () => {
-
-  const [routesSwitch, setRoutes] = useState(()=> []);
-  
+  const [routesSwitch, setRoutes] = useState(() => []);
   useEffect(() => {
-
     setRoutes(() => {
       return Switches;
     });
@@ -32,13 +28,11 @@ const Routes = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        {
-        routesSwitch.map((text, index) => (
+        {routesSwitch.map((text, index) => (
           <Route path={text.paths} key={index}>
             {text.page}
           </Route>
-        ))
-        }
+        ))}
       </Switch>
     </>
   );
