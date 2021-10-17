@@ -126,9 +126,6 @@ const LoginForm = () => {
           </div>
 
       </CardActions>
-      {/* <div>
-        Name: {practicePurpose}
-      </div> */}
     </Card>
   );
 }; //end of login form
@@ -155,7 +152,15 @@ const textFields = [
 //sign up function
 const SignUp = (props) => {
   const [open, setOpen] = React.useState(props.openHandle);
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {setOpen(!open)
+    setValues({
+      ...values,
+      showPassword: false,
+      password: "",
+      confirmPassword: "",
+      confirmShowPassword: false
+    });
+  };
   const handleClose = () => setOpen(false);
 
   const [values, setValues] = React.useState({
@@ -167,17 +172,16 @@ const SignUp = (props) => {
 
   //showPassword validations
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+    if(prop === "password"){
+      setValues({ ...values, [prop]: event.target.value });
+    }
+    else if(prop ==="confirmPassword"){
+      setValues({ ...values, [prop]: event.target.value });
+    }
   };
-  // const handleClickShowPassword = () => {
-  //   setValues({
-  //     ...values,
-  //     showPassword: !values.showPassword,
-  //   });
-  // };
-  
-  const handleClickShowPassword = () => {
-    if(values.showPassword ===  values.showPassword ){
+    
+  const handleClickShowPassword = (prop) => (event) => {
+    if(prop ===  "show" ){
       setValues({
         ...values,
         showPassword: !values.showPassword,
@@ -194,16 +198,7 @@ const SignUp = (props) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  // confirm Password validation
-  const confirmPasswordHandleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
   
-  const handleMouseDownPasswordConfirm = (event) => {
-    event.preventDefault();
-  };
-
   return (
     <>
       <Button onClick={handleOpen}>Sign Up</Button>
@@ -266,7 +261,7 @@ const SignUp = (props) => {
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
+                            onClick={handleClickShowPassword("show")}
                             onMouseDown={handleMouseDownPassword}
                           >
                             {values.showPassword ? (
@@ -289,13 +284,13 @@ const SignUp = (props) => {
                       id="standard-adornment-password"
                       type={values.confirmShowPassword ? "text" : "password"}
                       value={values.confirmPassword}
-                      onChange={handleChange("password")}
+                      onChange={handleChange("confirmPassword")}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPasswordConfirm}
+                            onClick={handleClickShowPassword("confirm")}
+                            onMouseDown={handleMouseDownPassword}
                           >
                             {values.confirmShowPassword ? (
                               <VisibilityOff />
