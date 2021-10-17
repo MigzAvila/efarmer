@@ -4,7 +4,7 @@ import Home from "../../pages/Home";
 import DataCenter from "../../pages/DataCenter";
 import Settings from "../../pages/Settings";
 import Forum from "../../pages/Forum";
-import LoginForm from "../../pages/LoginForm";
+import {LoginForm} from "../../pages/LoginForm";
 import { Route, Switch } from "react-router-dom";
 
 const Switches = [
