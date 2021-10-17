@@ -160,18 +160,35 @@ const SignUp = (props) => {
 
   const [values, setValues] = React.useState({
     password: "",
+    confirmPassword: "",
     showPassword: false,
+    confirmShowPassword: false
   });
 
   //showPassword validations
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+  // const handleClickShowPassword = () => {
+  //   setValues({
+  //     ...values,
+  //     showPassword: !values.showPassword,
+  //   });
+  // };
+  
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    if(values.showPassword ===  values.showPassword ){
+      setValues({
+        ...values,
+        showPassword: !values.showPassword,
+      })
+    }
+    else{
+      setValues({
+        ...values,
+        confirmShowPassword: !values.confirmShowPassword,
+      })
+    }
   };
 
   const handleMouseDownPassword = (event) => {
@@ -182,12 +199,7 @@ const SignUp = (props) => {
   const confirmPasswordHandleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  const handleClickShowPasswordConfirm = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
+  
   const handleMouseDownPasswordConfirm = (event) => {
     event.preventDefault();
   };
@@ -275,17 +287,17 @@ const SignUp = (props) => {
                     </InputLabel>
                     <Input
                       id="standard-adornment-password"
-                      type={values.showPassword ? "text" : "password"}
-                      value={values.password}
-                      onChange={confirmPasswordHandleChange("password")}
+                      type={values.confirmShowPassword ? "text" : "password"}
+                      value={values.confirmPassword}
+                      onChange={handleChange("password")}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPasswordConfirm}
+                            onClick={handleClickShowPassword}
                             onMouseDown={handleMouseDownPasswordConfirm}
                           >
-                            {values.showPassword ? (
+                            {values.confirmShowPassword ? (
                               <VisibilityOff />
                             ) : (
                               <Visibility />
