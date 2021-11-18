@@ -18,6 +18,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CloudIcon from "@mui/icons-material/Cloud";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
 
@@ -26,6 +27,7 @@ const drawerWidth = 240;
 const tabArrays = [
   { Link: "/", Name: "Home", Icon: <HomeIcon style={{ color: "white" }} /> },
   { Link: "/Weather", Name: "Weather", Icon: <CloudIcon style={{ color: "white" }} />},
+  { Link: "/Management", Name: "Data Management", Icon: <AssignmentIcon style={{ color: "white" }} />},
   { Link: "/DataCenter", Name: "Data Center", Icon: <StorageOutlinedIcon style={{ color: "white" }} />},
   { Link: "/Forum", Name: "Forum", Icon: <ForumIcon style={{ color: "white" }} />},
   { Link: "/Settings", Name: "Settings", Icon: <SettingsIcon style={{ color: "white" }} />},
