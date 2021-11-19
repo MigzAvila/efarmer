@@ -9,13 +9,15 @@ import Forum from "../../pages/Forum";
 import {LoginForm} from "../../pages/LoginForm";
 import { Route, Switch } from "react-router-dom";
 import AddCrop from "../../pages/AddCrop";
+import AddLivestock from "../../pages/AddLiveStock"
 
 const Switches = [
   { paths: "/Weather", page: <Weather /> },
   { paths: "/DataCenter", page: <DataCenter /> },
   { paths: "/Management", page: <Management/> },
   { paths: "/Search", page: <Search/> },
-  { paths: "/addcrop", page: <AddCrop/>},
+  { paths: "/crop", page: <AddCrop/>},
+  { paths: "/livestock", page: <AddLivestock/>},
   { paths: "/Forum", page: <Forum /> },
   { paths: "/Settings", page: <Settings /> },
   { paths: "/LoginForm", page: <LoginForm /> },

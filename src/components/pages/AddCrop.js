@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Grid, } from '@material-ui/core';
-import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
-import PageHeader from '../../components/PageHeader';
 import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment } from '@material-ui/core';
 import useTable from "../../components/useTable";
 import * as cropData from "../../components/data/cropData";
@@ -12,8 +10,9 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import Popup from '../../components/Popup';
 import AddCropForm from "./addCropForm";
-import AddLivestockForm from "./addLivestockForm"; 
 import Notification from "../../components/Notification";
+import ConfirmDialog from "../../components/ConfirmDialog";
+
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(3)
     },
     searchInput: {
-        width: '125%'
+        width: '500px'
     },
     newButton: {
         position: 'absolute',
@@ -32,22 +31,22 @@ const useStyles = makeStyles(theme => ({
 
 const headCells = [
     { id: 'field', label: 'Field - Location' },
-    { id: 'crop', label: 'Crop / Livestock' },
+    { id: 'crop', label: 'Crop' },
     { id: 'LandUsage', label: 'Land Usage' },
-
-    { id: 'Stage', label: 'Stage' }
+    { id: 'Stage', label: 'Stage' },
+    { id : 'Action', label: 'Actions'}
    
 ]
 
 const AddCrop = () => {
     const classes = useStyles;
     const [openPopup, setOpenPopup] = useState(false)
-    const [openPopLivestock, setOpenLivestockPopup] = useState(false)
     const [records, setRecords] = useState(cropData.getAllCrops())
     const [notify, setNotify] = useState({ isOpen: false, message: '', type: '' })
-
     const [recordForEdit, setRecordForEdit] = useState(null)
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
+    const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
+
     const {
         TblContainer,
         TblHead,
@@ -55,11 +54,22 @@ const AddCrop = () => {
         recordsAfterPagingAndSorting
     } = useTable( records, headCells, filterFn)
 
+    const handleSearch = e => {
+        let target = e.target;
+        setFilterFn({
+            fn: items => {
+                if (target.value === "")
+                    return items;
+                else
+                    return items.filter(x => x.crop.toLowerCase().includes(target.value))
+            }
+        })
+    }
     const addOrEdit = (crop, resetForm) => {
         if (crop.id === 0)
             cropData.addCrop(crop)
         else
-            cropData.updateCrop(cropData)
+            cropData.updateCrop(crop)
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
@@ -71,13 +81,24 @@ const AddCrop = () => {
         })
     }
     const openInPopup = item => {
-        // setRecordForEdit(item)
+        setRecordForEdit(item)
         setOpenPopup(true)
     }
 
-    const openInLivestockPopup = item =>{
+  
 
-        setOpenLivestockPopup(true)
+    const onDelete = id => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        cropData.deleteCrop(id);
+        setRecords(cropData.getAllCrops())
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully',
+            type: 'error'
+        })
     }
     
     
@@ -89,14 +110,14 @@ const AddCrop = () => {
         <Paper className={classes.pageContent}>
         <Toolbar>
                     <Controls.Input
-                        label="Search Crop and LiveStock"
+                        label="Search Crop"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (<InputAdornment position="start">
                                 <Search />
                             </InputAdornment>)
                         }}
-                        // onChange={handleSearch}
+                        onChange={handleSearch}
                     />
                     <Controls.Button
                         text="Add Crop"
@@ -105,13 +126,7 @@ const AddCrop = () => {
                         className={classes.newButton}
                          onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
                     />
-                    <Controls.Button
-                        text="Add LiveStock"
-                        variant="outlined"
-                        startIcon={<AddIcon />}
-                        className={classes.newButton}
-                         onClick={() => { setOpenLivestockPopup(true) }}
-                    />
+               
                 </Toolbar>
                 <TblContainer>
                     <TblHead />
@@ -121,7 +136,7 @@ const AddCrop = () => {
                                 (<TableRow key={item.id}>
                                     <TableCell>{item.field}</TableCell>
                                     <TableCell>{item.crop}</TableCell>
-                                    <TableCell>{item.LandUsage}</TableCell>
+                                    <TableCell>{item.land}</TableCell>
                                     <TableCell>{item.Stage}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
@@ -132,12 +147,12 @@ const AddCrop = () => {
                                         <Controls.ActionButton
                                             color="secondary"
                                             onClick={() => {
-                                                // setConfirmDialog({
-                                                //     isOpen: true,
-                                                //     title: 'Are you sure to delete this record?',
-                                                //     subTitle: "You can't undo this operation",
-                                                //     onConfirm: () => { onDelete(item.id) }
-                                                // })
+                                                setConfirmDialog({
+                                                    isOpen: true,
+                                                    title: 'Are you sure to delete this record?',
+                                                    subTitle: "You can't undo this operation",
+                                                    onConfirm: () => { onDelete(item.id) }
+                                                })
                                             }}>
                                             <CloseIcon fontSize="small" />
                                         </Controls.ActionButton>
@@ -154,25 +169,22 @@ const AddCrop = () => {
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >
-               
-                  <AddCropForm
+                <AddCropForm
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit}
-                  />
+                />
             </Popup> 
-            <Popup
-                title="Add LiveStock"
-                openLivestock={openPopLivestock}
-                setOpenLivestockPopup={setOpenLivestockPopup}
-            >
-                <AddLivestockForm/>
-                  
-            </Popup>  
+           
 
-              <Notification
+            <Notification
                 notify={notify}
                 setNotify={setNotify}
-            />               
+            />    
+
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />           
       </div>
     );
   };
