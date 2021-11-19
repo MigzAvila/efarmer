@@ -103,7 +103,7 @@ export default function CropForm(props) {
                         error={errors.land}
                     />
                     <Controls.Select
-                        name="Stage"
+                        name="stageId"
                         label="Stage"
                         value={values.stageId}
                         onChange={handleInputChange}

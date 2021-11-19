@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Grid, } from '@material-ui/core';
 import Controls from "../../components/Controls/Control";
 import { useForm, Form } from '../../components/useForm';
-import * as cropData from "../../components/data/cropData";
+import * as livestockData from "../../components/data/livestockData";
 
 
 
@@ -18,6 +18,7 @@ const initialFValues = {
     breed: '',
     gender: '',
     age: '',
+    stageId:'',
     orgin: '',
     weight: '',
     goalWeight:'',
@@ -30,14 +31,16 @@ export default function LivestockForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('fullName' in fieldValues)
-            temp.fullName = fieldValues.fullName ? "" : "This field is required."
-        if ('email' in fieldValues)
-            temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
-        if ('mobile' in fieldValues)
-            temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
-        if ('departmentId' in fieldValues)
-            temp.departmentId = fieldValues.departmentId.length !== 0 ? "" : "This field is required."
+        if ('species' in fieldValues)
+            temp.species = fieldValues.species ? "" : "This field is required."
+        if ('breed' in fieldValues)
+         temp.breed = fieldValues.breed ? "" : "This field is required."
+
+        if ('age' in fieldValues)
+            temp.age = fieldValues.age ? "" : "This field is required."
+
+        if ('stageId' in fieldValues)
+            temp.stageId = fieldValues.stageId ? "" : "This field is required."
         setErrors({
             ...temp
         })
@@ -45,7 +48,6 @@ export default function LivestockForm(props) {
         if (fieldValues === values)
             return Object.values(temp).every(x => x === "")
     }
-    const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
     const {
         values,
@@ -101,6 +103,15 @@ export default function LivestockForm(props) {
                         value={values.age}
                         onChange={handleInputChange}
                         error={errors.age}
+                    />
+
+                    <Controls.Select
+                        name="stageId"
+                        label="Stage"
+                        value={values.stageId}
+                        onChange={handleInputChange}
+                        options={livestockData.getStageCollection()}
+                        error={errors.stageId}
                     />
 
                 </Grid>
