@@ -10,7 +10,7 @@ import {
 import { Animation } from "@devexpress/dx-react-chart";
 
 const barGraphData = [
-  { year: "1950", population: 2.525},
+  { year: "1950", population: 2.525 },
   { year: "1960", population: 3.018 },
   { year: "1970", population: 3.682 },
   { year: "1980", population: 4.44 },
@@ -31,14 +31,15 @@ export default class Demo extends React.PureComponent {
   render() {
     const { barGraphData: barGraphData } = this.state;
     return (
-      <Box sx={{ width: "100%" }}><Chart data={barGraphData}>
-                <ArgumentAxis />
-                <ValueAxis max={7} />
+      <Box sx={{ width: "100%" }}>
+        <Chart data={barGraphData}>
+          <ArgumentAxis />
+          <ValueAxis max={7} />
 
-                <BarSeries valueField="population" argumentField="year" />
-                <Title text="World population" />
-                <Animation />
-              </Chart>
+          <BarSeries valueField="population" argumentField="year" />
+          <Title text="World population" />
+          <Animation />
+        </Chart>
       </Box>
     );
   }
