@@ -20,6 +20,7 @@ export class QuestionService {
     console.log(currentQues, "currentQues");
 
     currentQues.Replies.push(newReply);
+    console.log(currentQues, "currentQues");
 
     try {
       await fetch(`http://localhost:3333/efarmer/${product}`, {

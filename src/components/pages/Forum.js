@@ -12,6 +12,7 @@ import { QuestionService } from "../ApiCalls/Questions";
 const Forum = () => {
   const [value, setValue] = React.useState("Controlled");
   const [questions, setQuestions] = useState([]);
+  const [replySave, setSaveReply] = useState("");
   // this.state = {
   //   value: "Please write an essay about your favorite DOM element.",
   // };
@@ -30,7 +31,7 @@ const Forum = () => {
 
   const saveReply = (id) => {
     console.log(id);
-    questionService.editReply(id);
+    questionService.editReply(id, replySave)
     //console.log(questions[0]._id)
   };
   const clearMessage = () => {
@@ -38,8 +39,10 @@ const Forum = () => {
     //console.log(questions[0]._id)
   };
   const onInputChange = (e, name) => {
-    console.log(e.target.value);
-    console.log(name);
+    // console.log(e.target.value);
+    // console.log(name);
+    setSaveReply( preveState => e.target.value);
+    console.log(replySave);
 
     // const val = (e.target && e.target.value) || "";
     // let _product = { ...product };
