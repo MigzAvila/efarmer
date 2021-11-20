@@ -27,11 +27,19 @@ const Forum = () => {
       console.log(e);
       setQuestions([]);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [questions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const saveReply = (id) => {
     console.log(id);
     questionService.editReply(id, replySave)
+    try {
+      questionService.getQuestions().then((res) => {
+        setQuestions(res);
+      });
+    } catch (e) {
+      console.log(e);
+      setQuestions([]);
+    }
     //console.log(questions[0]._id)
   };
   const clearMessage = () => {
