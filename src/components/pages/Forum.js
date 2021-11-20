@@ -21,7 +21,6 @@ const Forum = () => {
     try {
       questionService.getQuestions().then((res) => {
         setQuestions(res);
-        console.log(res);
       });
     } catch (e) {
       console.log(e);
@@ -29,9 +28,9 @@ const Forum = () => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const saveReply = () => {
-    // console.log(value);
-    //questionService.editReply(questions[]._id)
+  const saveReply = (id) => {
+    console.log(id);
+    questionService.editReply(id);
     //console.log(questions[0]._id)
   };
   const clearMessage = () => {
@@ -57,7 +56,7 @@ const Forum = () => {
         image="https://agfundernews.com/wp-content/uploads/2019/06/iStock-958399840.jpg"
       />
       {questions.map((text, index) => (
-        <CardContent key={index}>
+        <CardContent key={text._id}>
           <h3>User-A Question</h3>
           <Typography gutterBottom variant="h5" component="div">
             {text.Question}
@@ -71,9 +70,8 @@ const Forum = () => {
               noValidate
               autoComplete="off"
             >
-              {console.log(text.Replies, !(text.Replies !== undefined))}
               {!(text.Replies === undefined) ? (
-                text.Replies.map((text, index) => <div>{text}</div>)
+                text.Replies.map((text, index) => <div key={index}>{text}</div>)
               ) : (
                 <div>test2</div>
               )}
@@ -89,10 +87,20 @@ const Forum = () => {
                   onChange={(e) => onInputChange(e, index)}
                 />
                 <CardActions>
-                  <Button size="small" onClick={saveReply()}>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      saveReply(text._id);
+                    }}
+                  >
                     Post
                   </Button>
-                  <Button size="small" onClick={clearMessage}>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      clearMessage();
+                    }}
+                  >
                     Clear
                   </Button>
                 </CardActions>
