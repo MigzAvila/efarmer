@@ -48,4 +48,36 @@ export class QuestionService {
     console.log(state, "is true or false");
     return state;
   }
+  //post async function to server to use
+  async postAsyncQuestion(data){
+  let state = false;
+  try {
+    await fetch("http://localhost:3333/efarmer/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Username: "",
+        Question: data,
+        Replies: [],
+      }),
+      // body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        state = true;
+        json = state;
+        return json;
+      });
+  } catch (err) {
+    console.log(err);
+    state = false;
+  }
+  console.log(state, "is true or false");
+  return state;
+};
+
 }
+

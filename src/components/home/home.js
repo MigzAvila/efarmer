@@ -21,11 +21,10 @@ const PersistentDrawerLeft = ()=> {
   
   const handleDrawerOpen = () => {
     setOpen(!open);
-    console.log("open")
+    setDrawerWidth(()=>{return 240})
   };
   const handleDrawerClose = () => {
     setOpen(!open);
-    console.log("close")
   };
 
   const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
