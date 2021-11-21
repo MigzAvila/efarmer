@@ -28,6 +28,7 @@ const tabArrays = [
   { Link: "/", Name: "Home", Icon: <HomeIcon style={{ color: "white" }} /> },
   { Link: "/Weather", Name: "Weather", Icon: <CloudIcon style={{ color: "white" }} />},
   { Link: "/Management", Name: "Data Management", Icon: <AssignmentIcon style={{ color: "white" }} />},
+ 
   { Link: "/DataCenter", Name: "Data Center", Icon: <StorageOutlinedIcon style={{ color: "white" }} />},
   { Link: "/Forum", Name: "Forum", Icon: <ForumIcon style={{ color: "white" }} />},
   { Link: "/Settings", Name: "Settings", Icon: <SettingsIcon style={{ color: "white" }} />},

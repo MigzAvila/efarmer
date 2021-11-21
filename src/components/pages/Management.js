@@ -6,14 +6,20 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
+import {  makeStyles} from '@material-ui/core';
+
 import DoughnutChart from "../charts/cropPie";
 import BarChart from "../charts/livestockBar";
+import Controls from "../../components/Controls/Control";
 
 
 const livestock = (
+
+
   <React.Fragment>
     <CardContent style={{backgroundColor:"teal", color:"white"}}>
-      
+    
       <Typography variant="h5" component="div">
        Total LiveStock : 5300
       </Typography>
@@ -48,7 +54,7 @@ const land = (
     <CardContent style={{backgroundColor:"teal", color:"white"}}>
       
       <Typography variant="h5" component="div">
-       Land in Use : 50 acres
+       Land in Use : 100 acres
       </Typography>
       <Typography sx={{ mb: 1.5 }} color="text.secondary">
         
@@ -76,19 +82,46 @@ const sales = (
 );
 
 const Item = styled(Paper)(({ theme }) => ({
+  
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 
+const useStyles = makeStyles(theme => ({
+  
+  buttons: {
+      color:'white',
+      backgroundColor:'#1E6738',
+
+  }
+}))
 
 
 const management = () => {
+  const classes = useStyles;
+
     return (
       <div >
-        <h1 style={{ textAlign: "center" }}>Data Management</h1>
+        <h1 style={{ textAlign: "center" }}>E-Farmer - Data Management</h1>
         <br />
+        
+        <Link to="/crop">
+          <Controls.Button
+            text="Crop"
+            variant="outlined"
+            className={classes.buttons}
+                        
+          />
+        </Link>
+        <Link to="/livestock">
+          <Controls.Button
+            text="Livestock"
+            className={classes.buttons}
+            variant="outlined"          
+          />  
+        </Link>
         
         {/* Data Management - Livestock and Crop Dashboard */}
         <Box sx={{ width: '100%' }}>

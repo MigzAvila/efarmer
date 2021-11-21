@@ -137,7 +137,7 @@ const AddCrop = () => {
                                     <TableCell>{item.field}</TableCell>
                                     <TableCell>{item.crop}</TableCell>
                                     <TableCell>{item.land}</TableCell>
-                                    <TableCell>{item.Stage}</TableCell>
+                                    <TableCell>{item.stage}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"

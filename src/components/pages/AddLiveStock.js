@@ -30,9 +30,9 @@ const useStyles = makeStyles(theme => ({
 
 
 const headCells = [
-    { id: 'field', label: 'Field - Location' },
-    { id: 'livestock', label: 'Livestock' },
-    { id: 'landUsage', label: 'Land Usage' },
+    { id: 'species', label: 'Species' },
+    { id: 'breed', label: 'Breed' },
+    { id: 'age', label: 'Age' },
     { id: 'stage', label: 'Stage' },
     { id : 'Action', label: 'Actions'}
    
@@ -61,7 +61,7 @@ const AddLiveStock = () => {
                 if (target.value === "")
                     return items;
                 else
-                    return items.filter(x => x.livestock.toLowerCase().includes(target.value))
+                    return items.filter(x => x.species.toLowerCase().includes(target.value))
             }
         })
     }
@@ -136,8 +136,8 @@ const AddLiveStock = () => {
                                 (<TableRow key={item.id}>
                                     <TableCell>{item.species}</TableCell>
                                     <TableCell>{item.breed}</TableCell>
-                                    <TableCell>{item.orign}</TableCell>
-                                    <TableCell>{item.stageId}</TableCell>
+                                    <TableCell>{item.age}</TableCell>
+                                    <TableCell>{item.stage}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
