@@ -76,7 +76,7 @@ const AddCrop = () => {
         setRecords(cropData.getAllCrops())
         setNotify({
             isOpen: true,
-            message: 'Submitted Successfully',
+            message: 'Submitted Successfully Crop',
             type: 'success'
         })
     }
@@ -96,7 +96,7 @@ const AddCrop = () => {
         setRecords(cropData.getAllCrops())
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Deleted Successfully Crop',
             type: 'error'
         })
     }
@@ -137,7 +137,7 @@ const AddCrop = () => {
                                     <TableCell>{item.field}</TableCell>
                                     <TableCell>{item.crop}</TableCell>
                                     <TableCell>{item.land}</TableCell>
-                                    <TableCell>{item.Stage}</TableCell>
+                                    <TableCell>{item.stage}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"

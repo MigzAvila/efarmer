@@ -79,9 +79,9 @@ export default function LivestockForm(props) {
                     <Controls.Input
                         name="species"
                         label="Species"
-                        value={values.field}
+                        value={values.species}
                         onChange={handleInputChange}
-                        error={errors.field}
+                        error={errors.species}
                     />
                     <Controls.Input
                         label="Breed"
@@ -146,7 +146,13 @@ export default function LivestockForm(props) {
                         onChange={handleInputChange}
                         error={errors.fieldMap}
                     />
-
+                    <div>
+                        <iframe
+            
+                            src='https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d15248.985749321982!2d-89.0847856!3d17.1582192!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbz!4v1637188915037!5m2!1sen!2sbz" width="600" height="450" style="border:0;"  loading="lazy"'
+                            title="Field Map"
+                        ></iframe>
+                    </div>
                     <div>
                     </div>
                     <div>

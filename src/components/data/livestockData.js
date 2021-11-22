@@ -7,7 +7,7 @@ export const getStageCollection = () => ([
     { id: '1', title: 'Conception' },
     { id: '2', title: 'Birth' },
     { id: '3', title: 'Weaning' },
-    { id: '4', title: 'Growth to Market Weigth' },
+    { id: '4', title: 'Growth to Market Weight' },
     { id: '5', title: 'Sexual Maturity' },
     { id: '6', title: 'Gestation' },
     { id: '7', title: 'Parturition' }
@@ -23,7 +23,7 @@ export function getAllLivestocks() {
     let stages = getStageCollection();
     return livestocks.map(x => ({
         ...x,
-        stage: stages[x.stageId - 1]
+        stage: stages[x.stageId - 1].title
     }))
 }
 

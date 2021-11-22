@@ -4,7 +4,7 @@ import BarChart from "../charts/barChart";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@material-ui/core/Paper";
-
+import Management from "./Management"
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -18,7 +18,9 @@ const Home = () => {
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Reports</h1>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+      <Management/>
+      {/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
           <Item>
             <DoughnutChart />
@@ -29,7 +31,7 @@ const Home = () => {
             <BarChart />
           </Item>
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 };

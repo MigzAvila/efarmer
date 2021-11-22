@@ -23,7 +23,7 @@ export function getAllCrops() {
     let stages = getStageCollection();
     return crops.map(x => ({
         ...x,
-        stage: stages[x.stageId - 1]
+        stage: stages[x.stageId - 1].title
     }))
 }
 
