@@ -17,7 +17,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 610,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -134,7 +134,7 @@ const Forum = () => {
         </Button>
         {questions.map((text, index) => (
           <CardContent key={text._id}>
-            <h3>User-A Question</h3>
+            <h3>Question {index + 1}</h3>
             <Typography gutterBottom variant="h5" component="div">
               {text.Question}
             </Typography>
