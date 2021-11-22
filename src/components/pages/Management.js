@@ -107,7 +107,7 @@ const management = () => {
         <h1 style={{ textAlign: "center" }}>E-Farmer - Data Management</h1>
         <br />
         
-        <Link to="/crop">
+        {/* <Link to="/crop">
           <Controls.Button
             text="Crop"
             variant="outlined"
@@ -121,7 +121,7 @@ const management = () => {
             className={classes.buttons}
             variant="outlined"          
           />  
-        </Link>
+        </Link> */}
         
         {/* Data Management - Livestock and Crop Dashboard */}
         <Box sx={{ width: '100%' }}>

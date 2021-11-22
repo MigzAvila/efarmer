@@ -76,7 +76,7 @@ const AddCrop = () => {
         setRecords(cropData.getAllCrops())
         setNotify({
             isOpen: true,
-            message: 'Submitted Successfully',
+            message: 'Submitted Successfully Crop',
             type: 'success'
         })
     }
@@ -96,7 +96,7 @@ const AddCrop = () => {
         setRecords(cropData.getAllCrops())
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Deleted Successfully Crop',
             type: 'error'
         })
     }

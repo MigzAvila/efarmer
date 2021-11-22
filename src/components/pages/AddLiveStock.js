@@ -76,7 +76,7 @@ const AddLiveStock = () => {
         setRecords(livestockData.getAllLivestocks())
         setNotify({
             isOpen: true,
-            message: 'Submitted Successfully',
+            message: 'Submitted Successfully Livestock',
             type: 'success'
         })
     }
@@ -96,7 +96,7 @@ const AddLiveStock = () => {
         setRecords(livestockData.getAllLivestocks())
         setNotify({
             isOpen: true,
-            message: 'Deleted Successfully',
+            message: 'Deleted Successfully Livestock',
             type: 'error'
         })
     }
