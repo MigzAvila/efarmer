@@ -15,7 +15,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const PersistentDrawerLeft = ()=> {
+const PersistentDrawerLeft = ({setOpenDash, setOpenLogin})=> {
   const [drawerWidth, setDrawerWidth] = useState(()=>{return 240});
   const [open, setOpen] = useState(() =>{return false});
   
@@ -53,6 +53,7 @@ const PersistentDrawerLeft = ()=> {
           open={open}
           handleDrawerOpen={handleDrawerOpen}
           handleDrawerClose={handleDrawerClose}
+          setOpenDash={setOpenDash} setOpenLogin={setOpenLogin}
         />
         <Main open={open}>
           <DrawerHeader />

@@ -22,10 +22,11 @@ const style = {
   p: 4,
 };
 const Forum = () => {
+  // const[textFieldValue, setTextFieldValue] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("Controlled");
   const [questions, setQuestions] = useState([]);
-  const [replySave, setSaveReply] = useState("");
+  const [replySave, setSaveReply] = useState([]);
   const [questionSave, setQuestionSave] = useState("");
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
@@ -38,15 +39,17 @@ const Forum = () => {
     try {
       questionService.getQuestions().then((res) => {
         setQuestions(res);
+        // console.log(textFieldValue[1]);
       });
+      
     } catch (e) {
       console.log(e);
       setQuestions([]);
     }
-  }, [questions]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const saveReply = (id) => {
-    console.log(id);
+    // console.log(id);
     questionService.editReply(id, replySave);
     try {
       questionService.getQuestions().then((res) => {
@@ -57,14 +60,13 @@ const Forum = () => {
       console.log(e);
       setQuestions([]);
     }
-    //console.log(questions[0]._id)
   };
   const clearMessage = () => {
     setSaveReply((preveState) => "");
     //questionService.editReply(questions[]._id)
     //console.log(questions[0]._id)
   };
-  const onInputChange = (e, name) => {
+  const onInputChange = (e, id)  => {
     setSaveReply((preveState) => e.target.value);
     console.log(replySave);
   };
@@ -134,7 +136,6 @@ const Forum = () => {
         </Button>
         {questions.map((text, index) => (
           <CardContent key={text._id}>
-            <h3>Question {index + 1}</h3>
             <Typography gutterBottom variant="h5" component="div">
               {text.Question}
             </Typography>
@@ -158,6 +159,7 @@ const Forum = () => {
                 <div>
                   <TextField
                     value={replySave}
+                    key={text._id}
                     id="filled-multiline-static"
                     label="Reply"
                     multiline

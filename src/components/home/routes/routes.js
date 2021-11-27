@@ -6,7 +6,7 @@ import Search from "../../pages/Search"
 import DataCenter from "../../pages/DataCenter";
 import Settings from "../../pages/Settings";
 import Forum from "../../pages/Forum";
-import {LoginForm} from "../../pages/LoginForm";
+// import Logout from "../../pages/Logout";
 import { Route, Switch } from "react-router-dom";
 import AddCrop from "../../pages/AddCrop";
 import AddLivestock from "../../pages/AddLiveStock"
@@ -20,7 +20,7 @@ const Switches = [
   { paths: "/livestock", page: <AddLivestock/>},
   { paths: "/Forum", page: <Forum /> },
   { paths: "/Settings", page: <Settings /> },
-  { paths: "/LoginForm", page: <LoginForm /> },
+  // { paths: "/Logout", page: <Logout /> },
 ];
 const Routes = () => {
   const [routesSwitch, setRoutes] = useState(() => []);

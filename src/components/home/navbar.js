@@ -17,11 +17,15 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import CloudIcon from "@mui/icons-material/Cloud";
 import SettingsIcon from "@mui/icons-material/Settings";
-import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
-
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Fade from '@mui/material/Fade'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 const drawerWidth = 240;
 
 const tabArrays = [
@@ -32,7 +36,6 @@ const tabArrays = [
   { Link: "/livestock", Name: "Livestock", Icon: <AssignmentIcon style={{ color: "white" }} />},
   { Link: "/Forum", Name: "Forum", Icon: <ForumIcon style={{ color: "white" }} />},
   { Link: "/Settings", Name: "Settings", Icon: <SettingsIcon style={{ color: "white" }} />},
-  { Link: "/LoginForm", Name: "Login Form", Icon: <SettingsIcon style={{ color: "white" }} />},
 ];
 
 const LinkStyle = {
@@ -70,6 +73,18 @@ const AppBar = styled(MuiAppBar, {
 const Navbar = (props) => {
   const [tab, setTabs] = useState([]);
   const theme = useTheme();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+    props.setOpenLogin(true);
+    props.setOpenDash(false);
+
+  };
 
   useEffect(() => {
 
@@ -81,6 +96,7 @@ const Navbar = (props) => {
   
   return (
     <>
+    
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -102,6 +118,31 @@ const Navbar = (props) => {
               Menu
             </Typography>
           ) : null}
+          <Grid item xs={2} sx={{textAlign: "right", marginLeft: "75%"}}>
+          <Button
+            id="fade-button"
+            color="inherit"
+            aria-controls="fade-menu"
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+          >
+            Miguel Avila
+            <KeyboardArrowDownIcon />
+          </Button>
+          <Menu
+            id="fade-menu"
+            MenuListProps={{
+              'aria-labelledby': 'fade-button',
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Fade}
+          >
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </Menu>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Drawer

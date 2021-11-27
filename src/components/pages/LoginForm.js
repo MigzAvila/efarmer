@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
@@ -16,14 +16,31 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import {QuestionService} from "../ApiCalls/Questions"
 
-const LoginForm = () => {
+const LoginForm = ({open, setOpenDash, openLogin, setOpenLogin}) => {
+  const [userAuth, setUserAuth] = useState([]);
+  const [Username, setUsername] = useState(""); //login username
+  const [Password, setPassword] = useState(""); //login password
   const[write, setWrite] = useState("")
   const [openHandle, setHandleOpen] = useState(() => false)
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
   });
+  const questionService = new QuestionService();
+  useEffect(() => {
+    try {
+      questionService.getQuestions().then((res) => {
+        setUserAuth(res);
+        // console.log(textFieldValue[1]);
+      });
+      
+    } catch (e) {
+      console.log(e);
+      setUserAuth([]);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const openHandleFun = (event) => {
     setHandleOpen(openHandle)
@@ -31,6 +48,7 @@ const LoginForm = () => {
   }
 
   const handleChange = (prop) => (event) => {
+    setPassword((prevState) =>  prevState = event.target.value );
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -44,11 +62,18 @@ const LoginForm = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
-  const practicePurpose = (e) => {
-   setWrite( e.target.value)  
-  }
 
+  const handleLoginCredentials = (event) => {
+    event.preventDefault();
+    console.log(Username, Password);
+    if (Username === "admin" && Password === "admin") {
+      setOpenDash(true); //open modal dashboard
+      setOpenLogin(false); //close login modal
+    } else {
+      alert("Invalid Credentials");
+    }
+  };
+  
   return (
     <Card
       sx={{ maxWidth: 345, margin: "0 auto", textAlign: "center", bgcolor: "white", borderColor: "error.main"}}
@@ -83,7 +108,7 @@ const LoginForm = () => {
                 id="standard-basic"
                 label="Username"
                 variant="standard"
-                onChange={practicePurpose}
+                onChange={(e) => setUsername((prevState) => e.target.value)}
               />
               <FormControl
                 sx={{ m: 1, width: "35ch", margin: "0 auto" }}
@@ -112,13 +137,13 @@ const LoginForm = () => {
                       </IconButton>
                     </InputAdornment>
                   }
-                />
+                />{Password}
               </FormControl>
             </Grid>
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" style={{ textAlign: "center", margin: "0 auto" }}>
+        <Button size="small" style={{ textAlign: "center", margin: "0 auto" }} onClick={handleLoginCredentials}>
           Login
         </Button>  
          <div style={{ textAlign: "center", margin: "0 auto" }}>
