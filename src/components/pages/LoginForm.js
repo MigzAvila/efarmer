@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
@@ -16,14 +16,23 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import {QuestionService} from "../ApiCalls/Questions"
+import { QuestionService } from "../ApiCalls/Questions";
 
-const LoginForm = ({open, setOpenDash, openLogin, setOpenLogin}) => {
+// create a dictionary of users with password and username
+const UsersDict = {
+  Ferdi: "Ferdi",
+  Miguel: "Miguel",
+  admin: "admin",
+  Imer: "Imer",
+};
+
+
+const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
   const [userAuth, setUserAuth] = useState([]);
   const [Username, setUsername] = useState(""); //login username
   const [Password, setPassword] = useState(""); //login password
-  const[write, setWrite] = useState("")
-  const [openHandle, setHandleOpen] = useState(() => false)
+  const [write, setWrite] = useState("");
+  const [openHandle, setHandleOpen] = useState(() => false);
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
@@ -35,20 +44,19 @@ const LoginForm = ({open, setOpenDash, openLogin, setOpenLogin}) => {
         setUserAuth(res);
         // console.log(textFieldValue[1]);
       });
-      
     } catch (e) {
       console.log(e);
       setUserAuth([]);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [openLogin]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const openHandleFun = (event) => {
-    setHandleOpen(openHandle)
-    console.log()
-  }
+    setHandleOpen(openHandle);
+    console.log();
+  };
 
   const handleChange = (prop) => (event) => {
-    setPassword((prevState) =>  prevState = event.target.value );
+    setPassword((prevState) => (prevState = event.target.value));
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -66,17 +74,28 @@ const LoginForm = ({open, setOpenDash, openLogin, setOpenLogin}) => {
   const handleLoginCredentials = (event) => {
     event.preventDefault();
     console.log(Username, Password);
-    if (Username === "admin" && Password === "admin") {
+
+    //checks if username name matches with password
+    const status = UsersDict[Username] === Password? true: false;
+  
+    if (status) {
       setOpenDash(true); //open modal dashboard
       setOpenLogin(false); //close login modal
+      setUser(Username); //set user
     } else {
       alert("Invalid Credentials");
     }
   };
-  
+
   return (
     <Card
-      sx={{ maxWidth: 345, margin: "0 auto", textAlign: "center", bgcolor: "white", borderColor: "error.main"}}
+      sx={{
+        maxWidth: 345,
+        margin: "0 auto",
+        textAlign: "center",
+        bgcolor: "white",
+        borderColor: "error.main",
+      }}
     >
       <div>Name: {write}</div>
       <CardMedia
@@ -94,62 +113,62 @@ const LoginForm = ({open, setOpenDash, openLogin, setOpenLogin}) => {
         >
           Login
         </Typography>
-        <Typography variant="body2" color="text.secondary" component = "div">
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              rowSpacing={1}
-              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        <Typography variant="body2" color="text.secondary" component="div">
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            <TextField
+              sx={{ m: 1, width: "35ch", margin: "0 auto", height: "70px" }}
+              id="standard-basic"
+              label="Username"
+              variant="standard"
+              onChange={(e) => setUsername((prevState) => e.target.value)}
+            />
+            <FormControl
+              sx={{ m: 1, width: "35ch", margin: "0 auto" }}
+              variant="standard"
             >
-              <TextField
-                sx={{ m: 1, width: "35ch", margin: "0 auto", height: "70px" }}
-                id="standard-basic"
-                label="Username"
-                variant="standard"
-                onChange={(e) => setUsername((prevState) => e.target.value)}
+              <InputLabel htmlFor="standard-adornment-password">
+                Password
+              </InputLabel>
+              <Input
+                id="standard-adornment-password"
+                type={values.showPassword ? "text" : "password"}
+                value={values.password}
+                onChange={handleChange("password")}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
-              <FormControl
-                sx={{ m: 1, width: "35ch", margin: "0 auto" }}
-                variant="standard"
-              >
-                <InputLabel htmlFor="standard-adornment-password">
-                  Password 
-                </InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />{Password}
-              </FormControl>
-            </Grid>
+              {Password}
+            </FormControl>
+          </Grid>
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" style={{ textAlign: "center", margin: "0 auto" }} onClick={handleLoginCredentials}>
+        <Button
+          size="small"
+          style={{ textAlign: "center", margin: "0 auto" }}
+          onClick={handleLoginCredentials}
+        >
           Login
-        </Button>  
-         <div style={{ textAlign: "center", margin: "0 auto" }}>
-         <SignUp  openHandle ={openHandle}/>
-          </div>
-
+        </Button>
+        <div style={{ textAlign: "center", margin: "0 auto" }}>
+          <SignUp openHandle={openHandle} />
+        </div>
       </CardActions>
     </Card>
   );
@@ -177,13 +196,14 @@ const textFields = [
 //sign up function
 const SignUp = (props) => {
   const [open, setOpen] = React.useState(props.openHandle);
-  const handleOpen = () => {setOpen(!open)
+  const handleOpen = () => {
+    setOpen(!open);
     setValues({
       ...values,
       showPassword: false,
       password: "",
       confirmPassword: "",
-      confirmShowPassword: false
+      confirmShowPassword: false,
     });
   };
   const handleClose = () => setOpen(false);
@@ -192,38 +212,36 @@ const SignUp = (props) => {
     password: "",
     confirmPassword: "",
     showPassword: false,
-    confirmShowPassword: false
+    confirmShowPassword: false,
   });
 
   //showPassword validations
   const handleChange = (prop) => (event) => {
-    if(prop === "password"){
+    if (prop === "password") {
       setValues({ ...values, [prop]: event.target.value });
-    }
-    else if(prop ==="confirmPassword"){
+    } else if (prop === "confirmPassword") {
       setValues({ ...values, [prop]: event.target.value });
     }
   };
-    
+
   const handleClickShowPassword = (prop) => (event) => {
-    if(prop ===  "show" ){
+    if (prop === "show") {
       setValues({
         ...values,
         showPassword: !values.showPassword,
-      })
-    }
-    else{
+      });
+    } else {
       setValues({
         ...values,
         confirmShowPassword: !values.confirmShowPassword,
-      })
+      });
     }
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
+
   return (
     <>
       <Button onClick={handleOpen}>Sign Up</Button>
@@ -251,84 +269,90 @@ const SignUp = (props) => {
               Sign In Form
             </Typography>
             <Typography variant="body2" color="text.secondary" component="div">
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="center"
-                  alignItems="center"
-                  rowSpacing={1}
-                  columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                >
-                  {/* mapping text fields from textFields object*/}
-                  {textFields.map((text, index) => (
-                    <TextField
-                      sx={{ m: 1, width: "35ch", margin: "0 auto", height: "60px",}}
-                      id="standard-basic"
-                      label={text.textFieldName}
-                      variant="standard"
-                      key={index}
-                    />
-                  ))}
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
+                {/* mapping text fields from textFields object*/}
+                {textFields.map((text, index) => (
+                  <TextField
+                    sx={{
+                      m: 1,
+                      width: "35ch",
+                      margin: "0 auto",
+                      height: "60px",
+                    }}
+                    id="standard-basic"
+                    label={text.textFieldName}
+                    variant="standard"
+                    key={index}
+                  />
+                ))}
 
-                  {/* password and confirm password input  field */}
-                    <FormControl
-                    sx={{ m: 1, width: "35ch", margin: "0 auto", height: "60px",}}
-                    variant="standard">
-                    <InputLabel htmlFor="standard-adornment-password">
-                      Password
-                    </InputLabel>
-                    <Input
-                      id="standard-adornment-password"
-                      type={values.showPassword ? "text" : "password"}
-                      value={values.password}
-                      onChange={handleChange("password")}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword("show")}
-                            onMouseDown={handleMouseDownPassword}
-                          >
-                            {values.showPassword ? (
-                              <VisibilityOff />
-                            ) : (
-                              <Visibility />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                  <FormControl
-                    sx={{ m: 1, width: "35ch", margin: "0 auto", height: "60px",}}
-                    variant="standard">
-                    <InputLabel htmlFor="standard-adornment-password">
-                      Confirm Password
-                    </InputLabel>
-                    <Input
-                      id="standard-adornment-password"
-                      type={values.confirmShowPassword ? "text" : "password"}
-                      value={values.confirmPassword}
-                      onChange={handleChange("confirmPassword")}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword("confirm")}
-                            onMouseDown={handleMouseDownPassword}
-                          >
-                            {values.confirmShowPassword ? (
-                              <VisibilityOff />
-                            ) : (
-                              <Visibility />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                  
-                </Grid>
+                {/* password and confirm password input  field */}
+                <FormControl
+                  sx={{ m: 1, width: "35ch", margin: "0 auto", height: "60px" }}
+                  variant="standard"
+                >
+                  <InputLabel htmlFor="standard-adornment-password">
+                    Password
+                  </InputLabel>
+                  <Input
+                    id="standard-adornment-password"
+                    type={values.showPassword ? "text" : "password"}
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword("show")}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {values.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl
+                  sx={{ m: 1, width: "35ch", margin: "0 auto", height: "60px" }}
+                  variant="standard"
+                >
+                  <InputLabel htmlFor="standard-adornment-password">
+                    Confirm Password
+                  </InputLabel>
+                  <Input
+                    id="standard-adornment-password"
+                    type={values.confirmShowPassword ? "text" : "password"}
+                    value={values.confirmPassword}
+                    onChange={handleChange("confirmPassword")}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword("confirm")}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {values.confirmShowPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </Grid>
             </Typography>
           </CardContent>
           <CardActions>

@@ -83,11 +83,9 @@ const Navbar = (props) => {
     setAnchorEl(null);
     props.setOpenLogin(true);
     props.setOpenDash(false);
-
   };
 
   useEffect(() => {
-
     setTabs(() => {
       return tabArrays;
     });
@@ -127,7 +125,7 @@ const Navbar = (props) => {
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
           >
-            Miguel Avila
+            {props.userName}
             <KeyboardArrowDownIcon />
           </Button>
           <Menu
@@ -137,7 +135,7 @@ const Navbar = (props) => {
             }}
             anchorEl={anchorEl}
             open={open}
-            onClose={handleClose}
+            onClose={() => {setAnchorEl(null)}}
             TransitionComponent={Fade}
           >
             <MenuItem onClick={handleClose}>Logout</MenuItem>

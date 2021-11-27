@@ -66,8 +66,8 @@ const Forum = () => {
     //questionService.editReply(questions[]._id)
     //console.log(questions[0]._id)
   };
-  const onInputChange = (e, id)  => {
-    setSaveReply((preveState) => e.target.value);
+  const onInputChange = (id)  => {
+    // setSaveReply((preveState) => e.target.value);
     console.log(replySave);
   };
   const onInputQuestion = (e) => {
@@ -157,18 +157,13 @@ const Forum = () => {
                 )}
 
                 <div>
-                  <TextField
-                    value={replySave}
-                    key={text._id}
-                    id="filled-multiline-static"
-                    label="Reply"
-                    multiline
-                    rows={4}
-                    variant="filled"
-                    // value={this.state.value}
-                    onChange={(e) => onInputChange(e, index)}
-                  />
                   <CardActions>
+                  <Button
+                   size="small"
+                    onClick={() => onInputChange(index)}
+                  >
+                    Reply
+                  </Button>
                     <Button
                       size="small"
                       onClick={() => {
