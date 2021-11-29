@@ -17,112 +17,110 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 610,
   bgcolor: "background.paper",
-  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 const Forum = () => {
-  // const[textFieldValue, setTextFieldValue] = useState([]);
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("Controlled");
   const [questions, setQuestions] = useState([]);
-  const [replySave, setSaveReply] = useState([]);
-  const [questionSave, setQuestionSave] = useState("");
-  const handleOpenModal = () => setOpen(true);
-  const handleCloseModal = () => setOpen(false);
-  // this.state = {
-  //   value: "Please write an essay about your favorite DOM element.",
-  // };
+  const [TextValue, setTextFieldValue] = useState([]); //1
+  const [ModalHeading, setModalHeading] = useState("");
+  const [ModalPlaceholder, setModalPlaceholder] = useState("");
+  const [UserId, setUserId] = useState("");
+
   const questionService = new QuestionService();
 
   useEffect(() => {
     try {
       questionService.getQuestions().then((res) => {
         setQuestions(res);
-        // console.log(textFieldValue[1]);
       });
-      
     } catch (e) {
       console.log(e);
       setQuestions([]);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [questions]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleCloseModal = () => setOpen(false);
+  const handleOpenModal = (param, index, text) => {
+    setOpen(true);
+    param === "Reply"
+      ? setModalHeading("Answer Question")
+      : setModalHeading("Type Question");
+    if (param === "Reply") {
+      setModalPlaceholder("Answer");
+      setUserId(text._id);
+    } else {
+      setModalPlaceholder("Question");
+    }
+  };
 
   const saveReply = (id) => {
-    // console.log(id);
-    questionService.editReply(id, replySave);
+    questionService.editReply(id, TextValue);
     try {
       questionService.getQuestions().then((res) => {
         setQuestions(res);
-        setSaveReply("");
+        setTextFieldValue("");
       });
     } catch (e) {
       console.log(e);
       setQuestions([]);
     }
   };
-  const clearMessage = () => {
-    setSaveReply((preveState) => "");
-    //questionService.editReply(questions[]._id)
-    //console.log(questions[0]._id)
+  const onInputText = (e) => {
+    setTextFieldValue((preveState) => e.target.value); //1
   };
-  const onInputChange = (id)  => {
-    // setSaveReply((preveState) => e.target.value);
-    console.log(replySave);
-  };
-  const onInputQuestion = (e) => {
-    setQuestionSave((preveState) => e.target.value);
-    // console.log(e.target.value);
-  };
-  const handleQuestionModal = () => {
-    console.log(questionSave);
-    questionService.postAsyncQuestion(questionSave);
-    try {
-      questionService.getQuestions().then((res) => {
-        setQuestions(res);
-      });
-    } catch (e) {
-      console.log(e);
-      setQuestions([]);
+  const handleQuestionModal = (param) => {
+    if (param === "Question") {
+      questionService.postAsyncQuestion(TextValue); //
+      try {
+        questionService.getQuestions().then((res) => {
+          setQuestions(res);
+        });
+      } catch (e) {
+        setQuestions([]);
+      }
+    }
+    if (param === "Answer") {
+      saveReply(UserId);
     }
     handleCloseModal(); //close modal
   };
   return (
     <>
-      {/* question modal */}
+      {/* question/Reply modal */}
       <Modal
         open={open}
-        onClose={handleCloseModal}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <Typography variant="h6" id="modal-title">
-            Type your question
+            {ModalHeading}
           </Typography>
           <TextField
             sx={{ width: "60ch", margin: "auto" }}
             id="filled-multiline-static"
-            label="Question"
+            label={ModalPlaceholder}
             multiline
             rows={4}
             variant="filled"
-            // value={this.state.value}
-            onChange={(e) => onInputQuestion(e)}
+            onChange={(e) => onInputText(e)}
           />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <Button
               onClick={() => {
-                handleQuestionModal();
+                handleQuestionModal(ModalPlaceholder);
               }}
             >
               Ok
             </Button>
-            <Button onClick={handleCloseModal}>Cancel</Button>
+            <Button onClick={() => setOpen(false)}>Cancel</Button>
           </Typography>
         </Box>
-      </Modal>
-
+      </Modal>{" "}
+      {/* end of Question/Reply modal */}
       <Card sx={{ maxWidth: "65%", margin: "0 auto" }}>
         <CardMedia
           component="img"
@@ -131,7 +129,7 @@ const Forum = () => {
           image="https://agfundernews.com/wp-content/uploads/2019/06/iStock-958399840.jpg"
         />
         <br />
-        <Button variant="contained" onClick={handleOpenModal}>
+        <Button variant="contained" onClick={() => handleOpenModal("Question")}>
           Ask Question
         </Button>
         {questions.map((text, index) => (
@@ -148,6 +146,16 @@ const Forum = () => {
                 noValidate
                 autoComplete="off"
               >
+                <CardActions>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => handleOpenModal("Reply", index, text)}
+                  >
+                    Reply
+                  </Button>
+                </CardActions>
+
                 {!(text.Replies === undefined) ? (
                   text.Replies.map((text, index) => (
                     <div key={index}>{text}</div>
@@ -155,31 +163,6 @@ const Forum = () => {
                 ) : (
                   <div>test2</div>
                 )}
-
-                <div>
-                  <CardActions>
-                  <Button
-                   size="small"
-                    onClick={() => onInputChange(index)}
-                  >
-                    Reply
-                  </Button>
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        saveReply(text._id);
-                      }}
-                    >
-                      Post
-                    </Button>
-                    <Button
-                      size="small"
-                      onClick={clearMessage}
-                      >
-                        Clear
-                    </Button>
-                  </CardActions>
-                </div>
               </Box>
             </Typography>
           </CardContent>
