@@ -26,13 +26,13 @@ const UsersDict = {
   Imer: "Imer",
 };
 
-
 const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
   const [userAuth, setUserAuth] = useState([]);
   const [Username, setUsername] = useState(""); //login username
   const [Password, setPassword] = useState(""); //login password
   const [write, setWrite] = useState("");
   const [openHandle, setHandleOpen] = useState(() => false);
+  const [invalidPass, setinvalidPass] = useState(() => false);
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
@@ -76,14 +76,13 @@ const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
     console.log(Username, Password);
 
     //checks if username name matches with password
-    const status = UsersDict[Username] === Password? true: false;
-  
+    const status = UsersDict[Username] === Password ? true : false;
+    setinvalidPass((preveState) => !status);
+
     if (status) {
       setOpenDash(true); //open modal dashboard
       setOpenLogin(false); //close login modal
       setUser(Username); //set user
-    } else {
-      alert("Invalid Credentials");
     }
   };
 
@@ -153,7 +152,17 @@ const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
                   </InputAdornment>
                 }
               />
-              {Password}
+              {invalidPass && (
+                <h4
+                  style={{
+                    color: "red",
+                    padding: "auto",
+                    margin: "10px auto auto auto",
+                  }}
+                >
+                  Invalid Credentials
+                </h4>
+              )}
             </FormControl>
           </Grid>
         </Typography>
