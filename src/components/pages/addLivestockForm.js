@@ -4,6 +4,8 @@ import Controls from "../../components/Controls/Control";
 import { useForm, Form } from '../../components/useForm';
 import * as livestockData from "../../components/data/livestockData";
 
+import GeoLocal from '../../components/pages/GeoLocation'
+
 
 
 const genderItems = [
@@ -14,8 +16,8 @@ const genderItems = [
 
 const initialFValues = {
     id: 0,
-    species: '',
-    breed: '',
+    speciesId: '',
+    breedId: '',
     gender: '',
     age: '',
     stageId:'',
@@ -31,10 +33,10 @@ export default function LivestockForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('species' in fieldValues)
-            temp.species = fieldValues.species ? "" : "This field is required."
-        if ('breed' in fieldValues)
-         temp.breed = fieldValues.breed ? "" : "This field is required."
+        // if ('species' in fieldValues)
+        //     temp.species = fieldValues.specieId ? "" : "This field is required."
+        // if ('breed' in fieldValues)
+        //  temp.breed = fieldValues.breedId ? "" : "This field is required."
 
         if ('age' in fieldValues)
             temp.age = fieldValues.age ? "" : "This field is required."
@@ -76,20 +78,25 @@ export default function LivestockForm(props) {
         <Form onSubmit={handleSubmit}>
             <Grid container>
                 <Grid item xs={6}>
-                    <Controls.Input
-                        name="species"
-                        label="Species"
-                        value={values.species}
+                    
+
+                    <Controls.Select
+                        name="speciesId"
+                        label="species"
+                        value={values.speciesId}
                         onChange={handleInputChange}
-                        error={errors.species}
+                        options={livestockData.getSpeciesCollection()}
+                        error={errors.speciesId}
                     />
-                    <Controls.Input
+                    <Controls.Select
+                        name="breedId"
                         label="Breed"
-                        name="breed"
-                        value={values.breed}
+                        value={values.breedId}
                         onChange={handleInputChange}
-                        error={errors.breed}
+                        options={livestockData.getBreedCollection()}
+                        error={errors.breedId}
                     />
+                   
                     <Controls.RadioGroup
                         name="gender"
                         label="Gender"
@@ -139,20 +146,8 @@ export default function LivestockForm(props) {
                         error={errors.goalWeight}
                     />  
 
-                    <Controls.Input
-                        label="Field Map"
-                        name="fieldMap"
-                        value={values.fieldMap}
-                        onChange={handleInputChange}
-                        error={errors.fieldMap}
-                    />
-                    <div>
-                        <iframe
-            
-                            src='https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d15248.985749321982!2d-89.0847856!3d17.1582192!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbz!4v1637188915037!5m2!1sen!2sbz" width="600" height="450" style="border:0;"  loading="lazy"'
-                            title="Field Map"
-                        ></iframe>
-                    </div>
+                    <GeoLocal />
+                  
                     <div>
                     </div>
                     <div>

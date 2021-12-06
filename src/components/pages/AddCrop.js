@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const headCells = [
+    {id: 'cropid', label: 'Crop Id' },
     { id: 'field', label: 'Field - Location' },
     { id: 'crop', label: 'Crop' },
     { id: 'LandUsage', label: 'Land Usage' },
@@ -134,11 +135,13 @@ const AddCrop = () => {
                         {
                             recordsAfterPagingAndSorting().map(item =>
                                 (<TableRow key={item.id}>
+                                    <TableCell>{item.id}</TableCell>
                                     <TableCell>{item.field}</TableCell>
-                                    <TableCell>{item.crop}</TableCell>
+                                    <TableCell>{item.croptypeId}</TableCell>
                                     <TableCell>{item.land}</TableCell>
                                     <TableCell>{item.stage}</TableCell>
                                     <TableCell>
+                
                                         <Controls.ActionButton
                                             color="primary"
                                             onClick={() => { openInPopup(item) }}>
@@ -149,7 +152,7 @@ const AddCrop = () => {
                                             onClick={() => {
                                                 setConfirmDialog({
                                                     isOpen: true,
-                                                    title: 'Are you sure to delete this record?',
+                                                    title: `Are you sure to delete this record - Crop Id: ${item.id}?`,
                                                     subTitle: "You can't undo this operation",
                                                     onConfirm: () => { onDelete(item.id) }
                                                 })

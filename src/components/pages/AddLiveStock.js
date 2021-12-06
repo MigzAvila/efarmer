@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const headCells = [
+    {id: "livestockId", label: "Livestock ID"},
     { id: 'species', label: 'Species' },
     { id: 'breed', label: 'Breed' },
     { id: 'age', label: 'Age' },
@@ -134,8 +135,9 @@ const AddLiveStock = () => {
                         {
                             recordsAfterPagingAndSorting().map(item =>
                                 (<TableRow key={item.id}>
-                                    <TableCell>{item.species}</TableCell>
-                                    <TableCell>{item.breed}</TableCell>
+                                    <TableCell>{item.id}</TableCell>
+                                    <TableCell>{item.speciesId}</TableCell>
+                                    <TableCell>{item.breedId}</TableCell>
                                     <TableCell>{item.age}</TableCell>
                                     <TableCell>{item.stage}</TableCell>
                                     <TableCell>
@@ -149,8 +151,8 @@ const AddLiveStock = () => {
                                             onClick={() => {
                                                 setConfirmDialog({
                                                     isOpen: true,
-                                                    title: 'Are you sure to delete this record?',
-                                                    subTitle: "You can't undo this operation",
+                                                    title: `Are you sure to delete this record - Livestock Id: ${item.id}?`,
+                                                    subTitle: "You can't undo this operation ",
                                                     onConfirm: () => { onDelete(item.id) }
                                                 })
                                             }}>
