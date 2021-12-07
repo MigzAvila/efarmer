@@ -33,7 +33,7 @@ const Forum = () => {
   useEffect(() => {
     try {
       questionService.getQuestions().then((res) => {
-        setQuestions(res);
+        setQuestions(res.reverse());
       });
     } catch (e) {
       console.log(e);
@@ -59,7 +59,7 @@ const Forum = () => {
     questionService.editReply(id, TextValue);
     try {
       questionService.getQuestions().then((res) => {
-        setQuestions(res);
+        setQuestions(res.reverse());
         setTextFieldValue("");
       });
     } catch (e) {
@@ -75,7 +75,7 @@ const Forum = () => {
       questionService.postAsyncQuestion(TextValue); //
       try {
         questionService.getQuestions().then((res) => {
-          setQuestions(res);
+          setQuestions(res.reverse());
         });
       } catch (e) {
         setQuestions([]);
@@ -129,13 +129,24 @@ const Forum = () => {
           image="https://agfundernews.com/wp-content/uploads/2019/06/iStock-958399840.jpg"
         />
         <br />
-        <Button variant="contained" onClick={() => handleOpenModal("Question")}>
+        <Button
+          sx={{
+            height: "20%",
+            marginBottom: "30px",
+            marginTop: "30px",
+            marginLeft: "23px",
+            fontSize: "20px",
+            backgroundColor: "teal", color:"white"
+          }}
+          variant="contained"
+          onClick={() => handleOpenModal("Question")}
+        >
           Ask Question
         </Button>
         {questions.map((text, index) => (
           <CardContent key={text._id}>
-            <Typography gutterBottom variant="h5" component="div">
-              {text.Question}
+            <Typography gutterBottom variant="h4" component="div">
+              {index + 1}: {text.Question}
             </Typography>
             <Typography variant="body2" color="text.secondary" component="div">
               <Box
@@ -148,7 +159,8 @@ const Forum = () => {
               >
                 <CardActions>
                   <Button
-                    variant="contained"
+                    sx={{ fontSize: "15px", backgroundColor: "teal", color:"white" }} 
+                    variant="contained"                                
                     size="small"
                     onClick={() => handleOpenModal("Reply", index, text)}
                   >
@@ -158,7 +170,14 @@ const Forum = () => {
 
                 {!(text.Replies === undefined) ? (
                   text.Replies.map((text, index) => (
-                    <div key={index}>{text}</div>
+                    <Typography
+                      variant="h5"
+                      component="div"
+                      sx={{ marginLeft: "20px" }}
+                      key={index}
+                    >
+                      {index + 1}: {text}
+                    </Typography>
                   ))
                 ) : (
                   <div>test2</div>

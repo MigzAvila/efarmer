@@ -112,12 +112,13 @@ const Navbar = (props) => {
             {!props.open ? <MenuIcon /> : null}
           </IconButton>
           {!props.open ? (
-            <Typography variant="h6" noWrap component="div">
+            <Typography variant="h5" noWrap component="div">
               Menu
             </Typography>
           ) : null}
           <Grid item xs={2} sx={{textAlign: "right", marginLeft: "75%"}}>
           <Button
+            sx={{fontSize: "20px"}}
             id="fade-button"
             color="inherit"
             aria-controls="fade-menu"
@@ -166,8 +167,13 @@ const Navbar = (props) => {
               <ChevronRightIcon style={{ color: "white" }} />
             )}
           </IconButton>
+<<<<<<< HEAD
           <Typography variant="h6" noWrap component="div">
             
+=======
+          <Typography variant="h5" noWrap component="div">
+            Back
+>>>>>>> 28c5e5f1043e263e75f80bd28f82784b28e608b1
           </Typography>
         </DrawerHeader>
         <Divider />
