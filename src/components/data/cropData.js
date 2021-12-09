@@ -44,7 +44,7 @@ export function getAllCrops() {
         croptype : croptypes[x.croptypeId - 1].title
     }))
 }
-
+console.log(getAllCrops())
 export function generateCropId() {
     if (localStorage.getItem(KEYS.cropId) == null)
         localStorage.setItem(KEYS.cropId, '0')

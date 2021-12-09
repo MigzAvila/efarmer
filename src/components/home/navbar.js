@@ -17,25 +17,45 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import CloudIcon from "@mui/icons-material/Cloud";
 import SettingsIcon from "@mui/icons-material/Settings";
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import ForumIcon from "@mui/icons-material/Forum";
 import { Link } from "react-router-dom";
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Fade from '@mui/material/Fade'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Fade from "@mui/material/Fade";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const drawerWidth = 240;
 
 const tabArrays = [
   { Link: "/", Name: "Home", Icon: <HomeIcon style={{ color: "white" }} /> },
-  { Link: "/Weather", Name: "Weather", Icon: <CloudIcon style={{ color: "white" }} />},
+  {
+    Link: "/Weather",
+    Name: "Weather",
+    Icon: <CloudIcon style={{ color: "white" }} />,
+  },
   // { Link: "/Management", Name: "Data Management", Icon: <AssignmentIcon style={{ color: "white" }} />},
-  { Link: "/crop", Name: "Crop", Icon: <AssignmentIcon style={{ color: "white" }} />},
-  { Link: "/livestock", Name: "Livestock", Icon: <AssignmentIcon style={{ color: "white" }} />},
-  { Link: "/Forum", Name: "Forum", Icon: <ForumIcon style={{ color: "white" }} />},
-  { Link: "/Settings", Name: "Settings", Icon: <SettingsIcon style={{ color: "white" }} />},
+  {
+    Link: "/crop",
+    Name: "Crop",
+    Icon: <AssignmentIcon style={{ color: "white" }} />,
+  },
+  {
+    Link: "/livestock",
+    Name: "Livestock",
+    Icon: <AssignmentIcon style={{ color: "white" }} />,
+  },
+  {
+    Link: "/Forum",
+    Name: "Forum",
+    Icon: <ForumIcon style={{ color: "white" }} />,
+  },
+  {
+    Link: "/Settings",
+    Name: "Settings",
+    Icon: <SettingsIcon style={{ color: "white" }} />,
+  },
 ];
 
 const LinkStyle = {
@@ -83,18 +103,17 @@ const Navbar = (props) => {
     setAnchorEl(null);
     props.setOpenLogin(true);
     props.setOpenDash(false);
+    props.setUser("");
   };
 
   useEffect(() => {
     setTabs(() => {
       return tabArrays;
     });
-
   }, []);
-  
+
   return (
     <>
-    
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -116,31 +135,33 @@ const Navbar = (props) => {
               Menu
             </Typography>
           ) : null}
-          <Grid item xs={2} sx={{textAlign: "right", marginLeft: "75%"}}>
-          <Button
-            sx={{fontSize: "20px"}}
-            id="fade-button"
-            color="inherit"
-            aria-controls="fade-menu"
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-          >
-            {props.userName}
-            <KeyboardArrowDownIcon />
-          </Button>
-          <Menu
-            id="fade-menu"
-            MenuListProps={{
-              'aria-labelledby': 'fade-button',
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={() => {setAnchorEl(null)}}
-            TransitionComponent={Fade}
-          >
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </Menu>
+          <Grid item xs={2} sx={{ textAlign: "right", marginLeft: "75%" }}>
+            <Button
+              sx={{ fontSize: "20px" }}
+              id="fade-button"
+              color="inherit"
+              aria-controls="fade-menu"
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              {props.userName}
+              <KeyboardArrowDownIcon />
+            </Button>
+            <Menu
+              id="fade-menu"
+              MenuListProps={{
+                "aria-labelledby": "fade-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={() => {
+                setAnchorEl(null);
+              }}
+              TransitionComponent={Fade}
+            >
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
           </Grid>
         </Toolbar>
       </AppBar>
@@ -167,13 +188,8 @@ const Navbar = (props) => {
               <ChevronRightIcon style={{ color: "white" }} />
             )}
           </IconButton>
-<<<<<<< HEAD
           <Typography variant="h6" noWrap component="div">
             
-=======
-          <Typography variant="h5" noWrap component="div">
-            Back
->>>>>>> 28c5e5f1043e263e75f80bd28f82784b28e608b1
           </Typography>
         </DrawerHeader>
         <Divider />

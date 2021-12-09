@@ -71,7 +71,6 @@ export const getBreedCollection = () => ([
 ])
 
 export function getAllLivestocks() {
-    console.log(JSON.stringify(getSpeciesCollection()))
     if (localStorage.getItem(KEYS.livestocks) == null)
         localStorage.setItem(KEYS.livestocks, JSON.stringify([]))
     let livestocks = JSON.parse(localStorage.getItem(KEYS.livestocks));
@@ -84,8 +83,9 @@ export function getAllLivestocks() {
     return livestocks.map(x => ({
         ...x,
         stage: stages[x.stageId - 1].title,
-        breed: breeds[x.breedId - 1],
-        species : speciess[x.speciesId - 1]
+        breed: breeds[x.breedId - 1].title,
+        species : speciess[x.speciesId - 1].title,
+       
         
         
     }))

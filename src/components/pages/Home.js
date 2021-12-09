@@ -4,7 +4,7 @@ import BarChart from "../charts/barChart";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@material-ui/core/Paper";
-import Management from "./Management"
+import Management from "./Management";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -13,13 +13,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
 const Home = () => {
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Reports</h1>
 
-      <Management/>
+      <Management />
       {/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={6}>
           <Item>
