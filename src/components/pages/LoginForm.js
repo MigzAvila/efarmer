@@ -30,7 +30,6 @@ const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
   const [userAuth, setUserAuth] = useState([]);
   const [Username, setUsername] = useState(""); //login username
   const [Password, setPassword] = useState(""); //login password
-  const [write, setWrite] = useState("");
   const [openHandle, setHandleOpen] = useState(() => false);
   const [invalidPass, setinvalidPass] = useState(() => false);
   const [values, setValues] = React.useState({
@@ -56,8 +55,15 @@ const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
   };
 
   const handleChange = (prop) => (event) => {
-    setPassword((prevState) => (prevState = event.target.value));
-    setValues({ ...values, [prop]: event.target.value });
+    if (prop === "password") {
+      setPassword((prevState) => (prevState = event.target.value));
+      setValues({ ...values, [prop]: event.target.value });
+      setinvalidPass((preveState) => false);
+
+    } else if (prop === "username") {
+      setUsername((prevState) => event.target.value);
+      setinvalidPass((preveState) => false);
+    }
   };
 
   const handleClickShowPassword = () => {
@@ -94,9 +100,10 @@ const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
         textAlign: "center",
         bgcolor: "white",
         borderColor: "error.main",
+        marginTop: "5%",
       }}
     >
-      <div>Name: {write}</div>
+
       <CardMedia
         component="img"
         height="270"
@@ -126,7 +133,8 @@ const LoginForm = ({ open, setOpenDash, openLogin, setOpenLogin, setUser }) => {
               id="standard-basic"
               label="Username"
               variant="standard"
-              onChange={(e) => setUsername((prevState) => e.target.value)}
+              onChange={handleChange("username")}
+              
             />
             <FormControl
               sx={{ m: 1, width: "35ch", margin: "0 auto" }}
