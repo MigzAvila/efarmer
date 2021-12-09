@@ -36,12 +36,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const headCells = [
+<<<<<<< HEAD
+    {id: "livestockId", label: "Livestock ID"},
+    { id: 'species', label: 'Species' },
+    { id: 'breed', label: 'Breed' },
+    { id: 'age', label: 'Age' },
+    { id: 'stage', label: 'Stage' },
+    { id : 'Action', label: 'Actions'}
+   
+]
+=======
   { id: "species", label: "Species" },
   { id: "breed", label: "Breed" },
   { id: "age", label: "Age" },
   { id: "stage", label: "Stage" },
   { id: "Action", label: "Actions" },
 ];
+>>>>>>> 28c5e5f1043e263e75f80bd28f82784b28e608b1
 
 const AddLiveStock = () => {
   const classes = useStyles;
@@ -77,11 +88,133 @@ const AddLiveStock = () => {
       fn: (items) => {
         if (target.value === "") return items;
         else
+<<<<<<< HEAD
+            livestockData.updateLivestock(livestock)
+        resetForm()
+        setRecordForEdit(null)
+        setOpenPopup(false)
+        setRecords(livestockData.getAllLivestocks())
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully Livestock',
+            type: 'success'
+        })
+    }
+    const openInPopup = item => {
+        setRecordForEdit(item)
+        setOpenPopup(true)
+    }
+
+  
+
+    const onDelete = id => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        livestockData.deleteLivestock(id);
+        setRecords(livestockData.getAllLivestocks())
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully Livestock',
+            type: 'error'
+        })
+    }
+    
+    
+    return (
+      <div >
+        <h1 style={{ textAlign: "center" }}> Livestock</h1>
+        <br />
+
+        <Paper className={classes.pageContent}>
+        <Toolbar>
+                    <Controls.Input
+                        label="Search Livestock"
+                        className={classes.searchInput}
+                        InputProps={{
+                            startAdornment: (<InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>)
+                        }}
+                        onChange={handleSearch}
+                    />
+                    <Controls.Button
+                        text="Add Livestock"
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        className={classes.newButton}
+                         onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
+                    />
+               
+                </Toolbar>
+                <TblContainer>
+                    <TblHead />
+                    <TableBody>
+                        {
+                            recordsAfterPagingAndSorting().map(item =>
+                                (<TableRow key={item.id}>
+                                    <TableCell>{item.id}</TableCell>
+                                    <TableCell>{item.speciesId}</TableCell>
+                                    <TableCell>{item.breedId}</TableCell>
+                                    <TableCell>{item.age}</TableCell>
+                                    <TableCell>{item.stage}</TableCell>
+                                    <TableCell>
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            onClick={() => { openInPopup(item) }}>
+                                            <EditOutlinedIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="secondary"
+                                            onClick={() => {
+                                                setConfirmDialog({
+                                                    isOpen: true,
+                                                    title: `Are you sure to delete this record - Livestock Id: ${item.id}?`,
+                                                    subTitle: "You can't undo this operation ",
+                                                    onConfirm: () => { onDelete(item.id) }
+                                                })
+                                            }}>
+                                            <CloseIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                    </TableCell>
+                                </TableRow>)
+                            )
+                        }
+                    </TableBody>
+                </TblContainer>
+                <TblPagination />
+        </Paper>
+            <Popup
+                title="Add Livestock"
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+            >
+                <AddLivestockForm
+                    recordForEdit={recordForEdit}
+                    addOrEdit={addOrEdit}
+                />
+            </Popup> 
+           
+
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />    
+
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />           
+      </div>
+    );
+=======
           return items.filter((x) =>
             x.species.toLowerCase().includes(target.value)
           );
       },
     });
+>>>>>>> 28c5e5f1043e263e75f80bd28f82784b28e608b1
   };
   const addOrEdit = (livestock, resetForm) => {
     if (livestock.id === 0) livestockData.addLivestock(livestock);

@@ -14,16 +14,34 @@ export const getStageCollection = () => ([
     { id: '8', title: 'Storage' },
 ])
 
+export const getCropCollection = () => ([
+
+    // { id: '1' , label: 'Corn'},
+    // { id :'2', label: 'Bean' },
+    // {  id : '3', label: 'Rice'  },
+
+    { id: '1', title: 'Corn' },
+    { id: '2', title: 'Bean' },
+    { id: '3', title: 'Rice' },
+    { id: '4', title: 'Onion' },
+    { id: '5', title: 'Tomatoe' },
+    { id: '6', title: 'Sweet Pepper' },
+    { id: '7', title: 'Potato' },
+    { id: '8', title: 'Carrot' },
+])
+
 
 export function getAllCrops() {
     if (localStorage.getItem(KEYS.crops) == null)
         localStorage.setItem(KEYS.crops, JSON.stringify([]))
     let crops = JSON.parse(localStorage.getItem(KEYS.crops));
-    
+    console.log('f')
     let stages = getStageCollection();
+    let croptypes = getCropCollection();
     return crops.map(x => ({
         ...x,
-        stage: stages[x.stageId - 1].title
+        stage: stages[x.stageId - 1].title,
+        croptype : croptypes[x.croptypeId - 1].title
     }))
 }
 

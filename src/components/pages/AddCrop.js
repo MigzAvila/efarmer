@@ -36,12 +36,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const headCells = [
+<<<<<<< HEAD
+    {id: 'cropid', label: 'Crop Id' },
+    { id: 'field', label: 'Field - Location' },
+    { id: 'crop', label: 'Crop' },
+    { id: 'LandUsage', label: 'Land Usage' },
+    { id: 'Stage', label: 'Stage' },
+    { id : 'Action', label: 'Actions'}
+   
+]
+=======
   { id: "field", label: "Field - Location" },
   { id: "crop", label: "Crop" },
   { id: "LandUsage", label: "Land Usage" },
   { id: "Stage", label: "Stage" },
   { id: "Action", label: "Actions" },
 ];
+>>>>>>> 28c5e5f1043e263e75f80bd28f82784b28e608b1
 
 const AddCrop = () => {
   const classes = useStyles;
@@ -77,11 +88,134 @@ const AddCrop = () => {
       fn: (items) => {
         if (target.value === "") return items;
         else
+<<<<<<< HEAD
+            cropData.updateCrop(crop)
+        resetForm()
+        setRecordForEdit(null)
+        setOpenPopup(false)
+        setRecords(cropData.getAllCrops())
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully Crop',
+            type: 'success'
+        })
+    }
+    const openInPopup = item => {
+        setRecordForEdit(item)
+        setOpenPopup(true)
+    }
+
+  
+
+    const onDelete = id => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        cropData.deleteCrop(id);
+        setRecords(cropData.getAllCrops())
+        setNotify({
+            isOpen: true,
+            message: 'Deleted Successfully Crop',
+            type: 'error'
+        })
+    }
+    
+    
+    return (
+      <div >
+        <h1 style={{ textAlign: "center" }}> Crop</h1>
+        <br />
+
+        <Paper className={classes.pageContent}>
+        <Toolbar>
+                    <Controls.Input
+                        label="Search Crop"
+                        className={classes.searchInput}
+                        InputProps={{
+                            startAdornment: (<InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>)
+                        }}
+                        onChange={handleSearch}
+                    />
+                    <Controls.Button
+                        text="Add Crop"
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        className={classes.newButton}
+                         onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
+                    />
+               
+                </Toolbar>
+                <TblContainer>
+                    <TblHead />
+                    <TableBody>
+                        {
+                            recordsAfterPagingAndSorting().map(item =>
+                                (<TableRow key={item.id}>
+                                    <TableCell>{item.id}</TableCell>
+                                    <TableCell>{item.field}</TableCell>
+                                    <TableCell>{item.croptypeId}</TableCell>
+                                    <TableCell>{item.land}</TableCell>
+                                    <TableCell>{item.stage}</TableCell>
+                                    <TableCell>
+                
+                                        <Controls.ActionButton
+                                            color="primary"
+                                            onClick={() => { openInPopup(item) }}>
+                                            <EditOutlinedIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                        <Controls.ActionButton
+                                            color="secondary"
+                                            onClick={() => {
+                                                setConfirmDialog({
+                                                    isOpen: true,
+                                                    title: `Are you sure to delete this record - Crop Id: ${item.id}?`,
+                                                    subTitle: "You can't undo this operation",
+                                                    onConfirm: () => { onDelete(item.id) }
+                                                })
+                                            }}>
+                                            <CloseIcon fontSize="small" />
+                                        </Controls.ActionButton>
+                                    </TableCell>
+                                </TableRow>)
+                            )
+                        }
+                    </TableBody>
+                </TblContainer>
+                <TblPagination />
+        </Paper>
+            <Popup
+                title="Add Crop"
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+            >
+                <AddCropForm
+                    recordForEdit={recordForEdit}
+                    addOrEdit={addOrEdit}
+                />
+            </Popup> 
+           
+
+            <Notification
+                notify={notify}
+                setNotify={setNotify}
+            />    
+
+            <ConfirmDialog
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />           
+      </div>
+    );
+=======
           return items.filter((x) =>
             x.crop.toLowerCase().includes(target.value)
           );
       },
     });
+>>>>>>> 28c5e5f1043e263e75f80bd28f82784b28e608b1
   };
   const addOrEdit = (crop, resetForm) => {
     if (crop.id === 0) cropData.addCrop(crop);

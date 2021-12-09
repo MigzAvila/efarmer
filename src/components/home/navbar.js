@@ -167,8 +167,13 @@ const Navbar = (props) => {
               <ChevronRightIcon style={{ color: "white" }} />
             )}
           </IconButton>
+<<<<<<< HEAD
+          <Typography variant="h6" noWrap component="div">
+            
+=======
           <Typography variant="h5" noWrap component="div">
             Back
+>>>>>>> 28c5e5f1043e263e75f80bd28f82784b28e608b1
           </Typography>
         </DrawerHeader>
         <Divider />
