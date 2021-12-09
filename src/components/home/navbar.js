@@ -35,6 +35,11 @@ const tabArrays = [
     Name: "Weather",
     Icon: <CloudIcon style={{ color: "white" }} />,
   },
+  {
+    Link: "/Forum",
+    Name: "Forum",
+    Icon: <ForumIcon style={{ color: "white" }} />,
+  },
   // { Link: "/Management", Name: "Data Management", Icon: <AssignmentIcon style={{ color: "white" }} />},
   {
     Link: "/crop",
@@ -46,11 +51,7 @@ const tabArrays = [
     Name: "Livestock",
     Icon: <AssignmentIcon style={{ color: "white" }} />,
   },
-  {
-    Link: "/Forum",
-    Name: "Forum",
-    Icon: <ForumIcon style={{ color: "white" }} />,
-  },
+
   // {
   //   Link: "/Settings",
   //   Name: "Settings",
