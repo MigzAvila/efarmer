@@ -189,7 +189,7 @@ const Navbar = (props) => {
             )}
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Back
+            
           </Typography>
         </DrawerHeader>
         <Divider />

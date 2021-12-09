@@ -2,26 +2,37 @@ import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import NavBar from "./navbar";
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/routes";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  
+
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
 
-const PersistentDrawerLeft = ({setOpenDash, setOpenLogin, userName})=> {
-  const [drawerWidth, setDrawerWidth] = useState(()=>{return 240});
-  const [open, setOpen] = useState(() =>{return false});
-  
+const PersistentDrawerLeft = ({
+  setOpenDash,
+  setOpenLogin,
+  userName,
+  setUser,
+}) => {
+  const [drawerWidth, setDrawerWidth] = useState(() => {
+    return 240;
+  });
+  const [open, setOpen] = useState(() => {
+    return false;
+  });
+
   const handleDrawerOpen = () => {
     setOpen(!open);
-    setDrawerWidth(()=>{return 240})
+    setDrawerWidth(() => {
+      return 240;
+    });
   };
   const handleDrawerClose = () => {
     setOpen(!open);
@@ -53,7 +64,9 @@ const PersistentDrawerLeft = ({setOpenDash, setOpenLogin, userName})=> {
           open={open}
           handleDrawerOpen={handleDrawerOpen}
           handleDrawerClose={handleDrawerClose}
-          setOpenDash={setOpenDash} setOpenLogin={setOpenLogin}
+          setOpenDash={setOpenDash}
+          setOpenLogin={setOpenLogin}
+          setUser={setUser}
           userName={userName}
         />
         <Main open={open}>
@@ -63,5 +76,5 @@ const PersistentDrawerLeft = ({setOpenDash, setOpenLogin, userName})=> {
       </Box>
     </Router>
   );
-}
-export default PersistentDrawerLeft; 
+};
+export default PersistentDrawerLeft;
