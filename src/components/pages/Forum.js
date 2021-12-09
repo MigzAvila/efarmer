@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { QuestionService } from "../ApiCalls/Questions";
+const questionService = new QuestionService();
 
 const style = {
   position: "absolute",
@@ -20,6 +21,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 const Forum = () => {
   const [open, setOpen] = React.useState(false);
   const [questions, setQuestions] = useState([]);
@@ -28,18 +30,18 @@ const Forum = () => {
   const [ModalPlaceholder, setModalPlaceholder] = useState("");
   const [UserId, setUserId] = useState("");
 
-  const questionService = new QuestionService();
-
   useEffect(() => {
     try {
       questionService.getQuestions().then((res) => {
         setQuestions(res.reverse());
+        console.log("res");
+        //  que = "changed";
       });
     } catch (e) {
       console.log(e);
       setQuestions([]);
     }
-  }, [questions]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [TextValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleCloseModal = () => setOpen(false);
   const handleOpenModal = (param, index, text) => {
@@ -67,6 +69,7 @@ const Forum = () => {
       setQuestions([]);
     }
   };
+
   const onInputText = (e) => {
     setTextFieldValue((preveState) => e.target.value); //1
   };
@@ -136,7 +139,8 @@ const Forum = () => {
             marginTop: "30px",
             marginLeft: "23px",
             fontSize: "20px",
-            backgroundColor: "teal", color:"white"
+            backgroundColor: "teal",
+            color: "white",
           }}
           variant="contained"
           onClick={() => handleOpenModal("Question")}
@@ -159,8 +163,12 @@ const Forum = () => {
               >
                 <CardActions>
                   <Button
-                    sx={{ fontSize: "15px", backgroundColor: "teal", color:"white" }} 
-                    variant="contained"                                
+                    sx={{
+                      fontSize: "15px",
+                      backgroundColor: "teal",
+                      color: "white",
+                    }}
+                    variant="contained"
                     size="small"
                     onClick={() => handleOpenModal("Reply", index, text)}
                   >
