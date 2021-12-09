@@ -51,11 +51,11 @@ const tabArrays = [
     Name: "Forum",
     Icon: <ForumIcon style={{ color: "white" }} />,
   },
-  {
-    Link: "/Settings",
-    Name: "Settings",
-    Icon: <SettingsIcon style={{ color: "white" }} />,
-  },
+  // {
+  //   Link: "/Settings",
+  //   Name: "Settings",
+  //   Icon: <SettingsIcon style={{ color: "white" }} />,
+  // },
 ];
 
 const LinkStyle = {
@@ -188,9 +188,7 @@ const Navbar = (props) => {
               <ChevronRightIcon style={{ color: "white" }} />
             )}
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            
-          </Typography>
+          <Typography variant="h6" noWrap component="div"></Typography>
         </DrawerHeader>
         <Divider />
         <List>
