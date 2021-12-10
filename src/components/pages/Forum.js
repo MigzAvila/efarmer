@@ -34,14 +34,13 @@ const Forum = () => {
     try {
       questionService.getQuestions().then((res) => {
         setQuestions(res.reverse());
-        console.log("res");
         //  que = "changed";
       });
     } catch (e) {
       console.log(e);
       setQuestions([]);
     }
-  }, [TextValue]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [questions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleCloseModal = () => setOpen(false);
   const handleOpenModal = (param, index, text) => {
